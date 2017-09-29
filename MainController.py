@@ -70,15 +70,19 @@ def get_allid():
 
 @app.route('/demo')
 def demo():
-    return render_template('index.html')
+    return render_template('demo.html')
 
 @app.route("/video")
 def video():
     return render_template('video.html')
 
-@app.route('/')
+@app.route('/main')
 def main():
     return render_template('main.html')
+
+@app.route('/')
+def init():
+    return render_template('init.html')
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8888)
