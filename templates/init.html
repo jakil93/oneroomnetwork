@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oneroom Network</title>
+
+    <style type="text/css">
+      input[type="number"]{
+        font-size: 32pt;
+        text-align: center;
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.mobile.flatui.css') }}" />
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
+
+    <script>
+
+        var password = new Array();
+
+        $(function(){
+
+          var temp = $("input[type='number']");
+
+          $(temp).on("keyup", function(){
+
+            var currentNum = $(this).attr("id").substr(-1, 1);
+            var nextNum = (parseInt(currentNum) + 1);
+            var prevNum = (parseInt(currentNum) - 1);
+
+            if($(this).val().length == 1){
+
+              password[currentNum - 1] = $(this).val();
+              $(this).val("0");
+              if( nextNum < 5 )
+                $("#pw" + nextNum).focus();
+            }else if ($(this).val().length > 1) {
+              $(this).val("0");
+            }
+            else{
+              password[ currentNum - 1] = $(this).val();
+              if( prevNum > 0 )
+                $("#pw" + prevNum).focus();
+            }
+          });
+
+        })
+
+        function enter(){
+          if( password.join("") == "1234" ){
+            alert("비밀번호가 맞습니다.");
+            location.href = "main";
+          }else{
+            alert("비밀번호가 틀렸습니다.");
+          }
+        }
+    </script>
+
+</head>
+<body>
+
+  <div data-role="page">
+
+    <div data-role="header">
+      <p align="center">OneRoom Network !</p>
+    </div>
+
+    <div data-role="content" role="main">
+
+      <img style="width: 90%; height: 90%" src="{{ url_for('static', filename='img/logo.png') }}">
+
+      <fieldset class="ui-grid-c">
+        <div class="ui-block-a">
+          <input type="number" id="pw1" value="" maxlength="1" autocomplete="off" pattern="[0-9]*"/>
+        </div>
+        <div class="ui-block-b">
+          <input type="number" id="pw2" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
+        </div>
+        <div class="ui-block-c">
+          <input type="number" id="pw3" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
+        </div>
+        <div class="ui-block-d">
+          <input type="number" id="pw4" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
+        </div>
+        <button onclick="enter()">Enter</button>
+      </fieldset>
+
+
+
+    </div>
+  </div>
+</body>
+</html>

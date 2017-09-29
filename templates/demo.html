@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oneroom Network</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.mobile.flatui.css') }}" />
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
+
+    <script>
+        function getID(){
+
+            var id = $("#get_id").val();
+            if(id == ''){
+                alert("조회하고 싶은 아이디를 입력해주세요!");
+                $("#get_id").focus();
+            }
+            else{
+                $.ajax({
+                    url : "GET/ID",
+                    method : "GET",
+                    data : "id=" + id,
+                    success : function(data){
+                        if(data.result == "success"){                     
+                            $("#getIDResult").html(
+                                    "<h3>조회하신 아이디의 정보입니다.</h3>" +
+                                    "ID : " + data.id + "<br/>" +
+                                    "NAME : " + data.name + "<br/>" +
+                                    "PHONE : " + data.phone
+                                );   
+                        }else{
+                            $("#getIDResult").html(
+                                    "<h3>해당 아이디는 존재하지 않습니다.</h3>"
+                                );   
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function createID(){
+            var id = $("#create_id").val();
+            var name = $("#create_name").val();
+            var phone = $("#create_phone").val();
+
+            if(id == '' || name == '' || phone == ''){
+                alert("ID 생성에 필요한 id, name, phone을 적어주세요.");
+            }else{
+                $.ajax({
+                    url : "POST/CREATEID",
+                    method : "POST",
+                    contentType : "application/x-www-form-urlencoded",
+                    data : "id=" + id + "&name=" + name + "&phone=" + phone,
+                    success : function(data){
+                        if(data.result == 1){
+                            alert("아이디가 정상적으로 생성되었습니다!");
+                            $("#create_id").val("");
+                            $("#create_name").val("");
+                            $("#create_phone").val("");
+                        }else{
+                            alert("아이디 생성에 실패했습니다! 이미 있는 아이디일 수 있습니다.");
+                            $("#create_id").focus();
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function updateID(){
+            var id = $("#update_id").val();
+            var name = $("#update_name").val();
+            var phone = $("#update_phone").val();
+
+            if(id == '' || name == '' || phone == ''){
+                alert("ID 업데이트에 필요한 id, name, phone을 적어주세요.");
+            }else{
+                $.ajax({
+                    url : "PUT/UPDATEID",
+                    method : "POST",
+                    contentType : "application/x-www-form-urlencoded",
+                    data : "id=" + id + "&name=" + name + "&phone=" + phone,
+                    success : function(data){
+                        if(data.result == 1){
+                            alert("아이디가 업데이트 되었습니다. 조회해보세요~");
+                            $("#update_id").val("");
+                            $("#update_name").val("");
+                            $("#update_phone").val("");
+                        }else{
+                            alert("존재하지 않는 아이디를 업데이트하려고 하셨습니다. 아이디를 확인해주세요.");
+                            $("#update_id").focus();
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function deleteID(){
+            var id = $("#delete_id").val();
+
+            if(id == ''){
+                alert("삭제할 ID를 적어주세요.");
+            }else{
+                $.ajax({
+                    url : "DELETE/DELETEID",
+                    method : "POST",
+                    contentType : "application/x-www-form-urlencoded",
+                    data : "id=" + id,
+                    success : function(data){
+                        if(data.result == 1){
+                            alert(id + "가 삭제되었습니다.");
+                            $("#delete_id").val("");
+                        }else{
+                            alert("존재하지 않는 아이디입니다.");
+                            $("#delete_id").focus();
+                        }
+                    },
+                    error :function(){
+                        alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                    }
+                });
+            }
+
+        }
+
+        function getAllData(){
+            $.ajax({
+                url : "GET/ALLID",
+                method : "POST",
+                success : function(data){
+                    var div = $("#getAllDataResult");
+
+                    var tag;
+
+                    tag = "<table border>";
+                    tag += "<tr>";
+                    tag += "<th>ID</th>";
+                    tag += "<th>NAME</th>";
+                    tag += "<th>PHONE</th>";
+                    tag += "</tr>";
+                    for(i=0; i<data.length; i++){                    
+                        tag += "<tr>";
+                        tag += "<td>"+ data[i].id +"</td>";
+                        tag += "<td>"+ data[i].name +"</td>";
+                        tag += "<td>"+ data[i].phone +"</td>";
+                        tag += "</tr>";
+                    }
+                    tag += "</table>";
+
+                    div.html(tag);
+                },
+                error :function(){
+                    alert("통신에 에러가 있습니다. 잠시후 다시 시도해주세요.")
+                }
+            });
+
+        }
+    </script>
+
+</head>
+<body>
+
+  <div data-role="page">
+
+    <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push"></div>
+
+    <div data-role="header">
+      <a data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
+      <h1>A</h1>
+      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
+    </div>
+
+    <div data-role="content" role="main">
+      <p>Sample text and <a href="#">links</a>.</p>
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button data-icon="flat-settings" data-theme="a">Button A</button></div>
+        <div class="ui-block-b"><button data-icon="flat-new" data-theme="b">Button B</button></div>
+      </fieldset>
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button data-icon="flat-man" data-theme="c">Button C</button></div>
+        <div class="ui-block-b"><button data-icon="flat-mail" data-theme="d">Button D</button></div>
+      </fieldset>
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button data-icon="flat-lock" data-theme="e">Button E</button></div>
+        <div class="ui-block-b"><button data-icon="flat-menu" data-theme="f">Button F</button></div>
+      </fieldset>
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button data-icon="flat-heart" data-theme="g">Button G</button></div>
+      </fieldset>
+
+      <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider" data-theme="a">List Header</li>
+        <li>Read-only list item</li>
+        <li><a href="#">Linked list item</a></li>
+      </ul>
+
+      <div data-role="collapsible-set" data-theme="b" data-content-theme="b">
+        <div data-role="collapsible" data-collapsed-icon="flat-time" data-expanded-icon="flat-cross" data-collapsed="false">
+          <h3>Section 1</h3>
+          <p>I'm the collapsible content for section 1</p>
+        </div>
+        <div data-role="collapsible" data-collapsed-icon="flat-calendar" data-expanded-icon="flat-cross">
+          <h3>Section 2</h3>
+          <p>I'm the collapsible content for section 2</p>
+        </div>
+        <div data-role="collapsible" data-collapsed-icon="flat-settings" data-expanded-icon="flat-cross">
+          <h3>Section 3</h3>
+          <p>I'm the collapsible content for section 3</p>
+        </div>
+      </div>
+
+      <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup">
+          <input type="radio" name="radio-choice-a" data-theme="c" id="radio-choice-1-a" value="choice-1" checked="checked" />
+          <label for="radio-choice-1-a">Radio 1</label>
+
+          <input type="radio" name="radio-choice-a" data-theme="c" id="radio-choice-1-b" value="choice-2"  />
+          <label for="radio-choice-1-b">Radio 2</label>
+          <input type="checkbox" name="checkbox-a" data-theme="c" id="checkbox-a" checked="checked" />
+          <label for="checkbox-a">Checkbox</label>
+        </fieldset>
+      </div>
+
+      <div data-role="fieldcontain">
+        <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="b" data-inline="true">Home</a>
+        <a href="#" data-role="button" data-icon="flat-video" data-iconpos="notext" data-theme="b" data-inline="true">Video</a>
+        <a href="#" data-role="button" data-icon="flat-time" data-iconpos="notext" data-theme="b" data-inline="true">Time</a>
+        <a href="#" data-role="button" data-icon="flat-settings" data-iconpos="notext" data-theme="b" data-inline="true">Settings</a>
+        <a href="#" data-role="button" data-icon="flat-plus" data-iconpos="notext" data-theme="b" data-inline="true">Plus</a>
+        <a href="#" data-role="button" data-icon="flat-new" data-iconpos="notext" data-theme="b" data-inline="true">New</a>
+        <a href="#" data-role="button" data-icon="flat-menu" data-iconpos="notext" data-theme="b" data-inline="true">Menu</a>
+        <a href="#" data-role="button" data-icon="flat-man" data-iconpos="notext" data-theme="b" data-inline="true">Man</a>
+        <a href="#" data-role="button" data-icon="flat-mail" data-iconpos="notext" data-theme="b" data-inline="true">Mail</a>
+        <a href="#" data-role="button" data-icon="flat-lock" data-iconpos="notext" data-theme="b" data-inline="true">Lock</a>
+        <a href="#" data-role="button" data-icon="flat-location" data-iconpos="notext" data-theme="b" data-inline="true">Location</a>
+        <a href="#" data-role="button" data-icon="flat-heart" data-iconpos="notext" data-theme="b" data-inline="true">Heart</a>
+        <a href="#" data-role="button" data-icon="flat-eye" data-iconpos="notext" data-theme="b" data-inline="true">Eye</a>
+        <a href="#" data-role="button" data-icon="flat-cross" data-iconpos="notext" data-theme="b" data-inline="true">Cross</a>
+        <a href="#" data-role="button" data-icon="flat-cmd" data-iconpos="notext" data-theme="b" data-inline="true">Cmd</a>
+        <a href="#" data-role="button" data-icon="flat-checkround" data-iconpos="notext" data-theme="b" data-inline="true">Checkround</a>
+        <a href="#" data-role="button" data-icon="flat-calendar" data-iconpos="notext" data-theme="b" data-inline="true">Calendar</a>
+        <a href="#" data-role="button" data-icon="flat-bubble" data-iconpos="notext" data-theme="b" data-inline="true">Bubble</a>
+        <a href="#" data-role="button" data-icon="flat-volume" data-iconpos="notext" data-theme="b" data-inline="true">Volume</a>
+        <a href="#" data-role="button" data-icon="flat-camera" data-iconpos="notext" data-theme="b" data-inline="true">Camera</a>
+      </div>
+
+      <select name="flip-1" id="flip-1" data-role="slider">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+      </select>
+
+      <div data-role="fieldcontain">
+        <div data-role="controlgroup" data-type="horizontal">
+          <a href="#" data-icon="flat-mail" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
+          <a href="#" data-icon="flat-camera" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
+          <a href="#" data-icon="flat-heart" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
+          <a href="#" data-icon="flat-eye" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
+        </div>
+      </div>
+
+      <div data-role="fieldcontain">
+        <select name="select-choice" id="select-choice-a" data-native-menu="false" data-theme="a">
+          <option value="standard">Option 1</option>
+          <option value="rush">Option 2</option>
+          <option value="express">Option 3</option>
+          <option value="overnight">Option 4</option>
+        </select>
+      </div>
+
+      <input type="text" placeholder="Text Input" />
+      <div data-role="fieldcontain">
+        <input type="range" name="slider" value="50" min="0" max="100" data-highlight="true" />
+      </div>
+    </div>
+  </div>
+
+  <div id="highlight">이게멍미? </div>
+</body>
+</html>
