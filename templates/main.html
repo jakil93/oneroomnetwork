@@ -13,7 +13,6 @@
 
     <script>
         $(function(){
-          alert("반갑습니다.");
         })
     </script>
 
@@ -21,33 +20,30 @@
 <body>
 
   <div data-role="page">
-
-    <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push"></div>
-
-    <div data-role="header">
-      <a data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
-      <h1>Oneroom Net</h1>
-      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
-    </div>
-
+      {% include 'header.html' %}
     <div data-role="content" role="main">
-      <p>Sample text and <a href="#">links</a>.</p>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-settings" data-theme="a">Button A</button></div>
-        <div class="ui-block-b"><button data-icon="flat-new" data-theme="b">Button B</button></div>
-      </fieldset>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-man" data-theme="c">Button C</button></div>
-        <div class="ui-block-b"><button data-icon="flat-mail" data-theme="d">Button D</button></div>
-      </fieldset>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-lock" data-theme="e">Button E</button></div>
-        <div class="ui-block-b"><button data-icon="flat-menu" data-theme="f">Button F</button></div>
-      </fieldset>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-heart" data-theme="g">Button G</button></div>
+        <fieldset class="ui-grid-b">
+
+        </fieldset>
+      <!--<p>Sample text and <a href="#">links</a>.</p>-->
+      <!--<fieldset class="ui-grid-a">-->
+        <!--<div class="ui-block-a"><button data-icon="flat-settings" data-theme="a">Button A</button></div>-->
+        <!--<div class="ui-block-b"><button data-icon="flat-new" data-theme="b">Button B</button></div>-->
+      <!--</fieldset>-->
+      <!--<fieldset class="ui-grid-a">-->
+        <!--<div class="ui-block-a"><button data-icon="flat-man" data-theme="c">Button C</button></div>-->
+        <!--<div class="ui-block-b"><button data-icon="flat-mail" data-theme="d">Button D</button></div>-->
+      <!--</fieldset>-->
+      <!--<fieldset class="ui-grid-a">-->
+        <!--<div class="ui-block-a"><button data-icon="flat-lock" data-theme="e">Button E</button></div>-->
+        <!--<div class="ui-block-b"><button data-icon="flat-menu" data-theme="f">Button F</button></div>-->
+      <!--</fieldset>-->
+      <!--<fieldset class="ui-grid-a">-->
+        <!--<div class="ui-block-a"><button data-icon="flat-heart" data-theme="g">Button G</button></div>-->
       </fieldset>
     </div>
+
+      {% include 'footer.html' %}
   </div>
 </body>
 </html>
