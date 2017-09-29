@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Oneroom Network</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.mobile.flatui.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.mobile.flatui.css') }}"/>
 
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
@@ -14,37 +14,71 @@
     <script>
         $(function(){
         })
-    </script>
 
+
+    </script>
+    <style>
+        .ui-icon-flat-config:after,
+        .ui-icon-flat-control:after,
+        .ui-icon-flat-chart:after {
+            background-size: 32px 32px;
+            background-repeat:no-repeat;
+        }
+        .ui-icon-flat-config:after {
+            background-image: url('{{ url_for('static', filename='img/config.png') }}');
+        }
+        .ui-icon-flat-control:after{
+            background-image: url('{{ url_for('static', filename='img/control.png') }}');
+        }
+        .ui-icon-flat-chart:after{
+            background-image: url('{{ url_for('static', filename='img/chart.png') }}');
+        }
+
+    </style>
 
 </head>
 <body>
 
-  <div data-role="page">
-      {% include 'header.html' %}
+<div data-role="page">
+    {% include 'header.html' %}
     <div data-role="content" role="main">
-        <fieldset class="ui-grid-b">
-
+        <fieldset class="ui-grid-a">
+            <!-- <div class="ui-btn" data-role="button"
+                 style="background-image:url('{{ url_for('static', filename='img/config.png') }}');background-repeat:no-repeat;background-size:inherit"></div> -->
+            <button data-icon="flat-config" class="ui-nodisc-icon">asdfasdf</button>
         </fieldset>
-      <!--<p>Sample text and <a href="#">links</a>.</p>-->
-      <!--<fieldset class="ui-grid-a">-->
-        <!--<div class="ui-block-a"><button data-icon="flat-settings" data-theme="a">Button A</button></div>-->
-        <!--<div class="ui-block-b"><button data-icon="flat-new" data-theme="b">Button B</button></div>-->
-      <!--</fieldset>-->
-      <!--<fieldset class="ui-grid-a">-->
-        <!--<div class="ui-block-a"><button data-icon="flat-man" data-theme="c">Button C</button></div>-->
-        <!--<div class="ui-block-b"><button data-icon="flat-mail" data-theme="d">Button D</button></div>-->
-      <!--</fieldset>-->
-      <!--<fieldset class="ui-grid-a">-->
-        <!--<div class="ui-block-a"><button data-icon="flat-lock" data-theme="e">Button E</button></div>-->
-        <!--<div class="ui-block-b"><button data-icon="flat-menu" data-theme="f">Button F</button></div>-->
-      <!--</fieldset>-->
-      <!--<fieldset class="ui-grid-a">-->
-        <!--<div class="ui-block-a"><button data-icon="flat-heart" data-theme="g">Button G</button></div>-->
+        <fieldset class="ui-grid-a">
+            <button data-icon="flat-control" class="ui-nodisc-icon">asdfasdfasd</button>
+        </fieldset>
+        <fieldset class="ui-grid-a">
+            <button data-icon="flat-chart" class="ui-nodisc-icon">asdfasdf</button>
+        </fieldset>
+
+        <!--     <button data-icon="flat-config">asdfasdf</button>
+        </fieldset>
+        <fieldset class="ui-grid-a">
+                <button data-icon="flat-control">asdfasdfasd</button>
+        </fieldset>
+        <fieldset class="ui-grid-a">
+            <button data-icon="flat-chart">asdfasdf</button>
+        </fieldset> -->
+
+        <!--  <div class="ui-block-a"><button data-icon="flat-settings" data-theme="a">Button A</button></div>
+        <div class="ui-block-b"><button data-icon="flat-new" data-theme="b">Button B</button></div>
       </fieldset>
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button data-icon="flat-man" data-theme="c">Button C</button></div>
+        <div class="ui-block-b"><button data-icon="flat-mail" data-theme="d">Button D</button></div>
+      </fieldset>
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button data-icon="flat-lock" data-theme="e">Button E</button></div>
+        <div class="ui-block-b"><button data-icon="flat-menu" data-theme="f">Button F</button></div>
+      </fieldset>
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button data-icon="flat-heart" data-theme="g">Button G</button></div>-->
     </div>
 
-      {% include 'footer.html' %}
-  </div>
+    {% include 'footer.html' %}
+</div>
 </body>
 </html>

@@ -675,14 +675,14 @@ div.ui-mobile-viewport {
 	content: "";
 	position: absolute;
 	display: block;
-	width: 22px;
-	height: 22px;
+	width: 32px;
+	height: 32px;
 }
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
 .ui-btn-icon-right:after {
 	top: 50%;
-	margin-top: -11px;
+	margin-top: -16px;
 }
 .ui-btn-icon-left:after {
 	left: .5625em;
@@ -3995,8 +3995,8 @@ label.ui-btn {
 	background-color: 					rgba(0,0,0,.3);
 	background-position: center center;
 	background-repeat: no-repeat;
-	-webkit-border-radius: 1em;
-	border-radius: 1em;
+	/* -webkit-border-radius: 1em; */
+	/* border-radius: 1em; */
 }
 /* Alt icons */
 .ui-alt-icon.ui-btn:after,
