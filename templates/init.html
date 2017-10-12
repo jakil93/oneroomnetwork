@@ -7,7 +7,7 @@
     <title>Oneroom Network</title>
 
     <style type="text/css">
-      input[type="number"]{
+      input[type="text"]{
         font-size: 32pt;
         text-align: center;
       }
@@ -24,7 +24,7 @@
 
         $(function(){
 
-          var temp = $("input[type='number']");
+          var temp = $("input[type='text']");
 
           $(temp).on("keyup", function(){
 
@@ -35,11 +35,11 @@
             if($(this).val().length == 1){
 
               password[currentNum - 1] = $(this).val();
-              $(this).val("0");
+              $(this).val("＊");
               if( nextNum < 5 )
                 $("#pw" + nextNum).focus();
             }else if ($(this).val().length > 1) {
-              $(this).val("0");
+              $(this).val("＊");
             }
             else{
               password[ currentNum - 1] = $(this).val();
@@ -75,16 +75,16 @@
 
       <fieldset class="ui-grid-c">
         <div class="ui-block-a">
-          <input type="number" id="pw1" value="" maxlength="1" autocomplete="off" pattern="[0-9]*"/>
+          <input type="text" id="pw1" value="" maxlength="1" autocomplete="off" pattern="[0-9]*"/>
         </div>
         <div class="ui-block-b">
-          <input type="number" id="pw2" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
+          <input type="text" id="pw2" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
         </div>
         <div class="ui-block-c">
-          <input type="number" id="pw3" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
+          <input type="text" id="pw3" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
         </div>
         <div class="ui-block-d">
-          <input type="number" id="pw4" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
+          <input type="text" id="pw4" value="" maxlength="1" autocomplete="off" pattern="[0-9]*">
         </div>
         <button onclick="enter()">Enter</button>
       </fieldset>
