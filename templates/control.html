@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oneroom Network</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.mobile.flatui.css') }}"/>
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
+
+    <script>
+        $(function(){
+        })
+
+
+    </script>
+
+</head>
+<body>
+
+<div data-role="page">
+    {% include 'header.html' %}
+    <div data-role="content" role="main" style="margin-top:35%;">
+        <table data-role="table" class="ui-responsive" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th>커튼</th>
+                    <th>창문</th>
+                <tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="{{ url_for('static', filename='img/toggleOn.png') }}"></td>
+                    <td><img src="{{ url_for('static', filename='img/toggleOff.png') }}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <fieldset class="ui-grid-a">
+            <button onclick="location.href='cctv'">CCTV</button>
+        </fieldset>
+    </div>
+
+    {% include 'footer.html' %}
+</div>
+</body>
+</html>
