@@ -12,25 +12,67 @@
     <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
 
     <script>
+        $(function(){
 
+            var temp = $("input[type='number']");
+
+            $(temp).on("keyup", function(){
+                if( String($(this).val()).length > 4 ){
+                    $(this).val(String( $(this).val() ).substring(0, 4));
+                    alert("비밀번호는 4자리여야만 합니다.");
+                }
+            });
+        });
     </script>
 
+    <style type="text/css">
+        input[type=number] {
+            -webkit-text-security: disc;
+            maxlength:4;
+        }
+    </style>
 
 </head>
 <body>
 
 <div data-role="page">
     {% include 'header.html' %}
-    <div data-role="content" role="main" style="margin-top:35%;">
+    <div data-role="main" style="margin-top:35%;">
         <fieldset class="ui-grid-a">
-            <button>비밀번호 변경</button>
+            <button data-rel="dialog" onclick="location.href='#chpwdialog'">비밀번호 변경</button>
         </fieldset>
         <fieldset class="ui-grid-a">
             <button>알람 설정</button>
         </fieldset>
+
+        <div data-role="popup" id="myPopup1" class="ui-content">
+          <p>I will appear centered within the window.</p>
+        </div>
     </div>
 
     {% include 'footer.html' %}
 </div>
+
+<div data-role="page" data-dialog="true" id="chpwdialog" data-close-btn="right">
+  <div data-role="header">
+    <h1>비밀번호 변경페이지</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <form method="post" action="demoform.asp">
+      <div class="ui-field-contain">
+        <label for="currentpw">현재 비밀번호</label>
+        <input type="number" name="currentpw" id="currentpw" maxlength="4" autocomplete="off" pattern="[0-9]*" inputmode="numeric">       
+        <label for="chpw1">변경 비밀번호</label>
+        <input type="number" name="chpw1" id="chpw1" maxlength="4" autocomplete="off" pattern="[0-9]*" inputmode="numeric">
+        <label for="chpw2">변경 비밀번호 확인</label>
+        <input type="number" name="chpw2" id="chpw2" maxlength="4" autocomplete="off" pattern="[0-9]*" inputmode="numeric">
+      </div>
+      <input type="submit" data-inline="true" value="Submit">
+    </form>
+  </div>
+
+</div> 
+
 </body>
 </html>
