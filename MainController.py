@@ -80,6 +80,18 @@ def video():
 def main():
     return render_template('main.html')
 
+@app.route('/config')
+def config():
+    return render_template('config.html')
+
+@app.route('/control')
+def control():
+    return render_template('control.html')
+
+@app.route('/chart')
+def chart():
+    return render_template('chart.html')
+
 @app.route('/')
 def init():
     return render_template('init.html')
