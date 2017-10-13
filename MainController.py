@@ -1,6 +1,5 @@
 # coding: utf-8
 from flask import Flask, render_template, request, jsonify, Response
-import streming
 
 app = Flask(__name__)
 
@@ -105,10 +104,6 @@ def chart():
 @app.route('/')
 def init():
     return render_template('init.html')
-
-@app.route('/video_feed')
-def video_feed():
-    return Response(streming.gen(), mimetype = 'multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8888)
