@@ -17,51 +17,6 @@
             text-align: center;
             border-bottom: 1px solid;
         }
-        
-        li.left {
-            -webkit-transition: -webkit-transform 250ms ease;
-            -webkit-transform: translateX(-100%);
-            -moz-transition: -moz-transform 250ms ease;
-            -moz-transform: translateX(-100%);
-            -o-transition: -o-transform 250ms ease;
-            -o-transform: translateX(-100%);
-            transition: transform 250ms ease;
-            transform: translateX(-100%);
-        }
-        /* Right transition */
-        li.right {
-            -webkit-transition: -webkit-transform 250ms ease;
-            -webkit-transform: translateX(100%);
-            -moz-transition: -moz-transform 250ms ease;
-            -moz-transform: translateX(100%);
-            -o-transition: -o-transform 250ms ease;
-            -o-transform: translateX(100%);
-            transition: transform 250ms ease;
-            transform: translateX(100%);
-        }
-        /* Border bottom for the previous button during the transition*/
-        li.left a.ui-button,
-        li.right a.ui-button {
-            border-top-width: 0;
-            border-left-width: 1px;
-            border-right-width: 1px;
-        }
-        li a.ui-button.border-bottom {
-            border-bottom-width: 1px;
-        }
-        /* Hide the delete button on touch devices */
-        ul.touch li.ui-listview-item-has-alternate a.delete {
-            display: none;
-        }
-        ul.touch li.ui-listview-item-has-alternate a.ui-button {
-            margin-right:0;
-        }
-        /* Styling for the popup */
-        #confirm p {
-            text-align: center;
-            font-size: inherit;
-            margin-bottom: .75em;
-        }
     </style>
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
@@ -134,21 +89,25 @@
 
         <div data-role="main" class="ui-content">
             <table width="100%">
-                <tr>
-                    <th>이름</th>
-                    <th>시간</th>
-                    <th>기능</th>
+                <tr bgcolor="grey" style="color: white">
+                    <td>이름</td>
+                    <td>시간</td>
+                    <td>기능</td>
                 </tr>
                 
                 <tr>
                     <td>기상</td>
                     <td>07:00</td>
-                    <td><span class="ui-btn-inner"><span class="ui-btn-text">Cross</span><span class="ui-icon ui-icon-flat-cross ui-icon-shadow">&nbsp;</span></span></td>
+                    <td align="center"><a href="index.html" class="ui-btn ui-icon-home ui-btn-icon-left"></a></td>
                 </tr>
                 <tr>
                     <td>출근</td>
                     <td>08:00</td>
-                    <td><a href="#" data-role="button" data-icon="flat-cross" data-iconpos="notext" data-theme="b" data-inline="true"></a></td>
+                    <td align="center"><a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"><button>추가</button></td>
                 </tr>
                 
             </table>
