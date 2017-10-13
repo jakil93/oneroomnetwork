@@ -88,6 +88,10 @@ def config():
 def control():
     return render_template('control.html')
 
+@app.route('/cctv')
+def cctv():
+    return render_template('cctv.html')
+
 @app.route('/chart')
 def chart():
     return render_template('chart.html')
