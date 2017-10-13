@@ -17,29 +17,42 @@
 
 
     </script>
-
+    <style>
+        table{
+            border-collapse: collapse;
+            width:100%;
+        }
+    </style>
 </head>
 <body>
 
 <div data-role="page">
     {% include 'header.html' %}
     <div data-role="content" role="main" style="margin-top:35%;">
-        <table data-role="table" class="ui-responsive" style="text-align: center;">
-            <thead>
-                <tr>
-                    <th>커튼</th>
-                    <th>창문</th>
-                <tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="{{ url_for('static', filename='img/toggleOn.png') }}"></td>
-                    <td><img src="{{ url_for('static', filename='img/toggleOff.png') }}"></td>
-                </tr>
-            </tbody>
-        </table>
+        <table style="text-align: center;">
+            <tr>
+                <td><h2>커튼</h2></td>
+                <td style="width: 40%">
+                    <select data-role="slider">
+                      <option value="off">OFF</option>
+                      <option value="on">ON</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><h2>창문</h2></td>
+                <td>
+                    <select data-role="slider">
+                      <option value="off">OFF</option>
+                      <option value="on">ON</option>
+                    </select>
+                </td>
+            </tr>
+        </table>            
+    </div>
+    <div data-role="content" style="margin-top:20%;">
         <fieldset class="ui-grid-a">
-            <button onclick="location.href='cctv'">CCTV</button>
+            <button onclick="location.href='cctv'" style="width:50%;margin-left: 25%">CCTV</button>
         </fieldset>
     </div>
 

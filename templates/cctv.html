@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oneroom Network</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.mobile.flatui.css') }}"/>
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
+
+    <script>
+        $(function(){
+        })
+
+
+    </script>
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+<div data-role="page">
+    {% include 'header.html' %}
+    <div data-role="content" role="main" style="margin-top:50%;">
+        <fieldset class="ui-grid-a">
+            <button onclick="location.href='streming'">실시간 영상</button>
+        </fieldset>
+        <fieldset class="ui-grid-a">
+            <button onclick="location.href=''">기록된 영상</button>
+        </fieldset>
+    </div>
+
+    {% include 'footer.html' %}
+</div>
+</body>
+</html>
