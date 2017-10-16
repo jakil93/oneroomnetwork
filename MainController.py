@@ -1,6 +1,7 @@
 # coding: utf-8
 from flask import Flask, render_template, request, jsonify, Response
-import cv2
+import streaming
+import picSetting
 
 app = Flask(__name__)
 
@@ -112,19 +113,10 @@ def init():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(), mimetype = 'multipart/x-mixed-replace; boundary=frame')
+    return Response(streaming.gen(), mimetype = 'multipart/x-mixed-replace; boundary=frame')
 
-def gen():
-    cam = cv2.VideoCapture(0)
-
-    while True:
-        ret,img = cam.read()
-        print(img)
-        frame=cv2.imencode(".jpeg",img)[1].tostring()
-        yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-    del(cam)
 
 if __name__ == "__main__":
+    picSetting.setting()
     app.run(debug=True, host="0.0.0.0", port=8888)
     print("Server shutdown..")
