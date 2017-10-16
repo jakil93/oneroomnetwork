@@ -114,7 +114,7 @@ def init():
 @app.route('/video_feed')
 def video_feed():
     img = st.gen()
-    if(img == None ):
+    if(img == "fail"):
         print("안녕")
     else:
         return Response(img, mimetype='multipart/x-mixed-replace; boundary=frame')

@@ -14,4 +14,4 @@ def gen():
 
         del(cam)
     except:
-        print("straming 안이다")
+        return "fail"
