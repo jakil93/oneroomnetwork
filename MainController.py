@@ -102,6 +102,10 @@ def streaming():
 def chart():
     return render_template('chart.html')
 
+@app.route('/test')
+def test():
+	return 'test'
+
 @app.route('/')
 def init():
     return render_template('init.html')
