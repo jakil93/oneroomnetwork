@@ -114,6 +114,7 @@ def init():
 @app.route('/video_feed')
 def video_feed():
     img = st.gen()
+    print("img", img)
     if(img == "fail"):
         print("안녕")
     else:

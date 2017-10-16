@@ -14,4 +14,4 @@ def gen():
 
         del(cam)
     except:
-        return "fail"
+        print("streaming 안 에러")
