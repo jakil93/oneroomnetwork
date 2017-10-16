@@ -1,3 +1,4 @@
+#coding:utf-8
 import cv2
 
 
@@ -13,4 +14,4 @@ def gen():
 
         del(cam)
     except:
-        return None
+        print("straming 안이다")
