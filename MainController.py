@@ -115,10 +115,9 @@ def init():
 def video_feed():
     try:
         img = st.gen()
+        return Response(img, mimetype='multipart/x-mixed-replace; boundary=frame')
     except :
-        return None
-
-    return Response(img, mimetype = 'multipart/x-mixed-replace; boundary=frame')
+        print("뜸")
 
 
 if __name__ == "__main__":
