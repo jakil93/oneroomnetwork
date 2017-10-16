@@ -113,11 +113,12 @@ def init():
 
 @app.route('/video_feed')
 def video_feed():
-    try:
-        img = st.gen()
+    img = st.gen()
+    if(img == None):
+        print("안녕")
+        return None
+    else:
         return Response(img, mimetype='multipart/x-mixed-replace; boundary=frame')
-    except :
-        print("뜸")
 
 
 if __name__ == "__main__":
