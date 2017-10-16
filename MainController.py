@@ -1,6 +1,6 @@
 # coding: utf-8
 from flask import Flask, render_template, request, jsonify, Response
-import streaming
+import streaming as st
 import picSetting
 
 app = Flask(__name__)
@@ -113,7 +113,7 @@ def init():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(streaming.gen(), mimetype = 'multipart/x-mixed-replace; boundary=frame')
+    return Response(st.gen(), mimetype = 'multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
