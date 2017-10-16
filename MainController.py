@@ -113,7 +113,12 @@ def init():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(st.gen(), mimetype = 'multipart/x-mixed-replace; boundary=frame')
+    try:
+        img = st.gen()
+    except :
+        return None
+
+    return Response(img, mimetype = 'multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
