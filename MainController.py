@@ -1,7 +1,10 @@
 # coding: utf-8
+import DBController as DBC
 from flask import Flask, render_template, request, jsonify, Response
 
 app = Flask(__name__)
+
+db = DBC.DBManager()
 
 def dataSelectID(id):
     print(id, "조회")
@@ -17,6 +20,15 @@ def dataDelete(id):
     
 def dataSelectAll():
     print("모든 데이터 조회")
+
+@app.route('/chkpw', methods=["GET"])
+def chkpw():
+
+    pw = request.args.get('pw')
+
+    print(pw)
+    result = jsonify( {"result" : db.comparePW( pw )})
+    return result
 
 @app.route('/GET/ID', methods=["GET"])
 def get_id():
@@ -111,5 +123,5 @@ def init():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8888)
+    app.run(debug=True, host="0.0.0.0", port=8888, threaded = True)
     print("Server shutdown..")
