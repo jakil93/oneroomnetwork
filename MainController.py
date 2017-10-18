@@ -1,5 +1,6 @@
 # coding: utf-8
 import DBController as DBC
+import streaming as st
 from flask import Flask, render_template, request, jsonify, Response
 
 app = Flask(__name__)
@@ -113,9 +114,17 @@ def streming():
 def chart():
     return render_template('chart.html')
 
-@app.route('/test')
-def test():
-	return 'test'
+@app.route('/video_feed')
+def video_feed():
+    img = st.gen()
+
+    try:
+        result = Response(img, mimetype='multipart/x-mixed-replace; boundary=frame')
+    except:
+        print("error")
+        result = None
+
+    return result
 
 @app.route('/')
 def init():
