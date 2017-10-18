@@ -105,9 +105,9 @@ def control():
 def cctv():
     return render_template('cctv.html')
 
-@app.route('/streming')
+@app.route('/streaming')
 def streming():
-    return render_template('streming.html')
+    return render_template('streaming.html')
 
 @app.route('/chart')
 def chart():
