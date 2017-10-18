@@ -120,7 +120,7 @@ def video_feed():
 
     try:
         #result = Response(img, mimetype='multipart/x-mixed-replace; boundary=frame')
-        result = Response(img, mimetype='video/mp4')
+        result = Response(img, mimetype='video/mp4; boundary=frame')
     except:
         print("error")
         result = None
