@@ -1,90 +1,39 @@
 # coding: utf-8
 import DBController as DBC
-import streaming as st
-from flask import Flask, render_template, request, jsonify, Response
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 
 app = Flask(__name__)
-
 db = DBC.DBManager()
 
-def dataSelectID(id):
-    print(id, "조회")
+@app.before_request
+def before_request():
+    if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw':
+        return redirect(url_for('init'))
 
-def dataInsert(id, name, phone):
-    print(id, name, phone, "삽입")
-    
-def dataUpdate(id, name, phone):
-    print(id, name, phone, "수정")
-    
-def dataDelete(id):
-    print(id, "삭제")
-    
-def dataSelectAll():
-    print("모든 데이터 조회")
-
-@app.route('/chkpw', methods=["GET"])
+@app.route('/chkpw', methods=["POST"])
 def chkpw():
 
-    pw = request.args.get('pw')
+    pw = request.form['pw']
+    cnt = db.comparePW(pw)
 
-    print(pw)
-    result = jsonify( {"result" : db.comparePW( pw )})
+    if cnt > 0:
+        session['username'] = str(db.selectUserName())
+
+    result = jsonify( {"result" : cnt})
     return result
 
-@app.route('/GET/ID', methods=["GET"])
-def get_id():
+@app.route('/changepw', methods=["POST"])
+def updatepw():
 
-    id = request.args.get('id')
-    rs = dataSelectID(id)
+    chpw = request.form['chpw']
 
-    try:
-        result = jsonify( {"result" : "success", "id" : rs[0], "name" : rs[1], "phone" : rs[2]} )
-    except:
-        result = jsonify({"result": "fail"})
+    result = jsonify( {"result" : str(db.updatePW(chpw)) })
     return result
-
-@app.route("/POST/CREATEID", methods=["POST"])
-def create_id():
-    id = request.form['id']
-    name = request.form['name']
-    phone = request.form['phone']
-
-    result = dataInsert(id, name, phone)
-    return jsonify({"result" : result})
-
-@app.route("/PUT/UPDATEID", methods=["POST"])
-def update_id():
-    id = request.form['id']
-    name = request.form['name']
-    phone = request.form['phone']
-
-    result = dataUpdate(id, name, phone)
-    return jsonify({"result" : result})
-
-@app.route("/DELETE/DELETEID", methods=["POST"])
-def delete_id():
-    id = request.form['id']
-
-    result = dataDelete(id)
-    return jsonify({"result" : result})
-
-@app.route("/GET/ALLID", methods=["POST"])
-def get_allid():
-    #result = jsonify( {"result" : "success", "id" : rs[0], "name" : rs[1], "phone" : rs[2]} )
-
-    result = []
-
-    data = dataSelectAll()
-    for item in data:
-        result.append({"id" : item[0], "name" : item[1], "phone" : item[2]})
-
-    print(result)
-
-    return jsonify(result)
 
 @app.route('/demo')
 def demo():
-    return render_template('demo.html')
+    result = render_template('demo.html')
+    return result
 
 @app.route("/video")
 def video():
@@ -114,24 +63,19 @@ def streming():
 def chart():
     return render_template('chart.html')
 
-@app.route('/video_feed')
-def video_feed():
-    img = st.gen()
-
-    try:
-        #result = Response(img, mimetype='multipart/x-mixed-replace; boundary=frame')
-        result = Response(img, mimetype='video/mp4')
-    except:
-        print("error")
-        result = None
-
-    return result
-
-@app.route('/')
+@app.route('/init')
 def init():
     return render_template('init.html')
 
+@app.route('/')
+def index():
+    result = render_template('init.html')
+
+    if 'username' in session:
+        result = render_template('main.html')
+    return result
 
 if __name__ == "__main__":
+    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(debug=True, host="0.0.0.0", port=8888, threaded = True)
     print("Server shutdown..")

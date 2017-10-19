@@ -33,6 +33,27 @@
                 }
             });
         });
+
+        function reqChangePW(){
+          $.ajax({
+            url : "changepw",
+            method : "POST",
+            data : "chpw=2222",
+            success : function(data){
+              if(data.result > 0){
+                alert("비밀번호를 변경하였습니다.");
+              }else{
+                alert("비밀번호를 변경하지못했습니다.");
+              }
+
+            },
+            error : function(){
+              alert("잠시 후 다시 시도해주세요.");
+            }
+          });
+
+
+        }
     </script>
 
 
@@ -75,7 +96,7 @@
             <label for="chpw2">변경 비밀번호 확인</label>
             <input type="number" name="chpw2" id="chpw2" maxlength="4" autocomplete="off" pattern="[0-9]*" inputmode="numeric">
           </div>
-          <input type="submit" value="변경하기">
+          <input type="button" onclick="reqChangePW()" value="변경하기">
         </form>
       </div>
 

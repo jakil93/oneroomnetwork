@@ -5,6 +5,21 @@ class DBManager:
     def __init__(self):
         self.conn = sqlite3.connect('test.db', check_same_thread=False)
 
+    def selectUserName(self):
+        cur = self.conn.cursor()
+        sql = "SELECT name FROM user WHERE no = 1"
+        cur.execute(sql)
+
+        return cur.fetchone()[0]
+
+    def updatePW(self, chpw):
+        cur = self.conn.cursor()
+        sql = "UPDATE user SET pw = "+ str(chpw) +" WHERE no = 1"
+        result = cur.execute(sql)
+        self.conn.commit()
+        return result.rowcount
+
+
     def comparePW(self, pw):
         cur = self.conn.cursor()
         sql = "SELECT * FROM user WHERE pw = " + pw

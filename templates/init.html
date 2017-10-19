@@ -56,10 +56,9 @@
 
           $.ajax({
             url : "chkpw",
-            method : "GET",
+            method : "POST",
             data : "pw=" + input,
             success : function(data){
-              alert(data);
               if(data.result > 0){
                 alert("비밀번호가 맞습니다.");
                 location.href = "main";
