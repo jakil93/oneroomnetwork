@@ -7,8 +7,29 @@ db = DBC.DBManager()
 
 @app.before_request
 def before_request():
-    if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw':
+    print("end", request.endpoint)
+    if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw' and request.endpoint != 'static':
         return redirect(url_for('init'))
+
+@app.route('/getAlaramData', methods=["GET"])
+def getAlaramData():
+    data = db.selectAlaramData()
+    return jsonify(data)
+
+@app.route("/deleteAlaramData", methods=["POST"])
+def deleteAlaramData():
+    return jsonify({ 'result' : db.deleteAlaramData( request.form['no'] ) })
+
+@app.route('/addAlaramData', methods=["POST"])
+def addAlaramData():
+
+    subject = request.form['subject']
+    time = request.form['time']
+
+    result = db.insertAlaramData(subject, time)
+    no = db.getAlaramDataNo(subject, time)
+
+    return jsonify({ 'result' : result.rowcount, "no" : no[0] })
 
 @app.route('/chkpw', methods=["POST"])
 def chkpw():
@@ -25,9 +46,10 @@ def chkpw():
 @app.route('/changepw', methods=["POST"])
 def updatepw():
 
+    curpw = request.form['currentpw']
     chpw = request.form['chpw']
 
-    result = jsonify( {"result" : str(db.updatePW(chpw)) })
+    result = jsonify( {"result" : str(db.updatePW(curpw, chpw)) })
     return result
 
 @app.route('/demo')

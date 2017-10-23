@@ -22,6 +22,14 @@
     <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
 
     <script>
+
+
+
+
+        $(document).on("pagebeforeshow", "#alarmdialog", function(){
+            loadAlaramData();
+        });
+
         $(function(){
 
             var temp = $("input[type='number']");
@@ -34,17 +42,123 @@
             });
         });
 
+        function loadAlaramData(){
+            var target = $("#alaramTable > tbody");
+            $(target).empty();
+
+            $.ajax({
+                url : "getAlaramData",
+                success : function(data){
+
+
+                    var tags = "";
+                    for(i=0; i<data.length; i++){
+                        tags += "<tr>";
+                        tags += "<td>"+ data[i].subject +"</td>";
+                        tags += "<td>"+ data[i].time +"</td>";
+                        tags += "<td align=\"center\"><a data-role=\"button\" data-icon=\"delete\" data-iconpos=\"notext\" onclick=\"deleteAlaramData(this, "+ data[i].no +")\">Delete</a></td>";
+                        tags += "</tr>";
+                        target.append(tags);
+                        tags = "";
+                    }
+
+                    $("#alarmdialog").trigger('create');
+
+                },
+                error : function(){
+                    alert("알람 데이터를 받아오는데 실패했습니다.");
+                }
+            });
+        }
+
+        function deleteAlaramData(target, no){
+
+            $.ajax({
+                url : "deleteAlaramData",
+                method : "POST",
+                data : "no=" + no,
+                success : function(data){
+                    alert("선택한 알람을 삭제했습니다.");
+                    $(target).parent().parent().remove();
+                },
+                error : function(){
+                    alert("알람 데이터를 삭제하는데 실패했습니다.");
+                }
+            });
+        }
+
+        function addAlaramData(){
+            var target = $("#alaramTable > tbody");
+            var subject = $("#subject").val();
+            var time = $("#time").val();
+            
+            if(time == ""){
+                alert("시간을 입력해주세요.");
+                $("#time").focus();
+                return;
+            }
+
+            $.ajax({
+                url : "addAlaramData",
+                method : "POST",
+                data : "subject=" + subject + "&time=" + time,
+                success : function(data){
+                    if(data.result > 0){
+                        $("#subject").val("");
+                        $("#time").val("");
+
+                        var tags = "";
+                        tags += "<tr>";
+                        tags += "<td>"+ subject +"</td>";
+                        tags += "<td>"+ time +"</td>";
+                        tags += "<td align=\"center\"><a data-role=\"button\" data-icon=\"delete\" data-iconpos=\"notext\" onclick=\"deleteAlaramData(this, "+ data.no +")\">Delete</a></td>";
+                        tags += "</tr>";
+                        target.append(tags);
+
+                        $("#alarmdialog").trigger('create');
+
+                        alert("알람을 추가했습니다.");
+                    }else{
+                        alert("실패했습니다. 잠시 후 시도해주세요.");
+                    }
+
+                },
+                error : function(){
+                    alert("알람 추가에 실패했습니다.");
+                }
+            });
+
+
+        }
+
         function reqChangePW(){
-          $.ajax({
-            url : "changepw",
-            method : "POST",
-            data : "chpw=2222",
-            success : function(data){
-              if(data.result > 0){
-                alert("비밀번호를 변경하였습니다.");
-              }else{
-                alert("비밀번호를 변경하지못했습니다.");
-              }
+
+            var currentpw = $("#currentpw").val();
+            var chpw1 = $("#chpw1").val();
+            var chpw2 = $("#chpw2").val();
+
+            if(chpw1 != chpw2){
+                alert("변경할 비밀번호가 일치하지 않습니다. 확인 후 다시 시도해주세요.");
+                $("#chpw1").focus();
+                return;
+            }
+
+            $.ajax({
+                url : "changepw",
+                method : "POST",
+                data : "currentpw="+ currentpw +"&chpw=" + chpw1,
+                success : function(data){
+                if(data.result > 0){
+                    alert("비밀번호를 변경하였습니다.");
+                    $("#chpw1").val();
+                    $("#chpw2").val();
+                    $("#currentpw").val();
+                }else if(data.result == -1){
+                    alert("현재 비밀번호가 맞지 않습니다.");
+                    $("#currentpw").focus();
+                }else{
+                    alert("비밀번호 변경에 실패했습니다.");
+                }
 
             },
             error : function(){
@@ -61,7 +175,7 @@
 </head>
 <body>
 
-    <div data-role="page">
+    <div data-role="page" id="test">
         {% include 'header.html' %}
         <div data-role="main" style="margin-top:35%;">
             <fieldset class="ui-grid-a">
@@ -87,7 +201,7 @@
       </div>
 
       <div data-role="main" class="ui-content">
-        <form method="post" action="demoform.asp">
+        <form method="post">
           <div class="ui-field-contain">
             <label for="currentpw">현재 비밀번호</label>
             <input type="number" name="currentpw" id="currentpw" maxlength="4" autocomplete="off" pattern="[0-9]*" inputmode="numeric">       
@@ -109,27 +223,34 @@
       </div>
 
         <div data-role="main" class="ui-content">
-            <table width="100%">
-                <tr bgcolor="grey" style="color: white">
-                    <td>이름</td>
-                    <td>시간</td>
-                    <td>기능</td>
-                </tr>
-                
-                <tr>
-                    <td>기상</td>
-                    <td>07:00</td>
-                    <td align="center"><a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a></td>
-                </tr>
-                <tr>
-                    <td>출근</td>
-                    <td>08:00</td>
-                    <td align="center"><a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a></td>
-                </tr>
 
-                <tr>
-                    <td colspan="3"><button>추가</button></td>
-                </tr>
+            <div class="ui-field-contain">
+                <label for="subject">이름</label>
+                <input type="text" id="subject" maxlength="6"/>
+                <label for="subject">시간</label>
+                <input type="time" id="time"/>
+                <div align="center">
+                    <input type="button" onclick="addAlaramData()" value="추가">
+                </div>
+            </div>
+            
+            <hr>
+
+            <table id="alaramTable" width="100%">
+                <thead>                    
+                    <tr bgcolor="grey" style="color: white">
+                        <td>이름</td>
+                        <td>시간</td>
+                        <td>기능</td>
+                    </tr>
+                </thead>
+                
+                <tbody>
+
+                </tbody>
+<!--                 <tr>
+    <td colspan="3"><button>추가</button></td>
+</tr> -->
                 
             </table>
             

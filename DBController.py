@@ -1,5 +1,5 @@
 #coding:utf-8
-import  sqlite3
+import sqlite3, json
 
 class DBManager:
     def __init__(self):
@@ -12,15 +12,30 @@ class DBManager:
 
         return cur.fetchone()[0]
 
-    def updatePW(self, chpw):
-        cur = self.conn.cursor()
-        sql = "UPDATE user SET pw = "+ str(chpw) +" WHERE no = 1"
-        result = cur.execute(sql)
-        self.conn.commit()
-        return result.rowcount
+    def updatePW(self, curpw, chpw):
 
+        cur = self.conn.cursor()
+        sql = "SELECT pw FROM user WHERE pw = ?";
+        result = cur.execute(sql, [curpw]).fetchall()
+
+        if result.__len__() > 0:
+            sql = "UPDATE user SET pw = ? WHERE pw = ?"
+            result = cur.execute(sql, (chpw, curpw))
+            self.conn.commit()
+            return result.rowcount
+        else:
+            return -1
+
+    def selectPW(self):
+        cur = self.conn.cursor()
+        sql = "SELECT pw FROM user"
+        cur.execute(sql)
+        print(cur.fetchall())
 
     def comparePW(self, pw):
+
+        self.selectPW()
+
         cur = self.conn.cursor()
         sql = "SELECT * FROM user WHERE pw = " + pw
         cur.execute(sql)
@@ -44,15 +59,22 @@ class DBManager:
         cur.execute(sql)
         self.conn.commit()
 
-    def insertAlaramData(self):
+    def getAlaramDataNo(self, subject, time):
+        cur = self.conn.cursor()
+        sql = "SELECT no FROM alaram WHERE subject = ? and time = ?"
+        cur.execute(sql, (subject, time))
+        result = cur.fetchall()
 
-        data = ( ('기상 시간', '07:00'), ('출근 시간', '08:00') )
+        return result
+
+    def insertAlaramData(self, subject, time):
 
         cur = self.conn.cursor()
         sql = "INSERT INTO alaram(subject, time) VALUES(?, ?)"
-        cur.executemany(sql, data)
-
+        result = cur.execute(sql, (subject, time))
         self.conn.commit()
+
+        return result
 
     def selectAlaramData(self):
 
@@ -61,17 +83,21 @@ class DBManager:
         cur.execute(sql)
         rows = cur.fetchall()
 
+        result = []
         for row in rows:
-            print(row)
+            result.append( {'no' : row[0], 'subject' : row[1], 'time' : row[2]} )
 
-    def deleteAlaramData(self):
+        return result
+
+    def deleteAlaramData(self, no):
         cur = self.conn.cursor()
-        sql = "DELETE FROM alaram WHERE no > 2"
+        sql = "DELETE FROM alaram WHERE no = ?"
 
-        result = cur.execute(sql)
-        print(result)
-
+        result = cur.execute(sql, [no])
+        result = result.fetchall()
         self.conn.commit()
+
+        return result.__len__()
 
     def updateAlaramData(self):
         cur = self.conn.cursor()
@@ -105,4 +131,6 @@ class DBManager:
 
 
 if __name__ == "__main__":
-    print("Hi!")
+    db = DBManager()
+    data = db.selectAlaramData()
+    pass
