@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Streaming</title>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+        div{
+            text-align: center;
+        }
+        img{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: 10px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Streaming</h1>
+        <img src="{{ url_for('video_feed') }}">
+        <button>Feed</button>
+    </div>
+
+    <script>
+        $('button').click(function(){
+            $.get('video_feed')
+            .done(function(data){
+                if(data == '1'){
+                    alert('Success!');
+                }else{
+                    alert('Fail!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

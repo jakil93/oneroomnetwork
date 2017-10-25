@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oneroom Network</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.mobile.flatui.css') }}"/>
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
+
+    <script>
+
+    </script>
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+<div data-role="page" id="pageone">
+    {% include 'header.html' %}
+  <div data-role="main" class="ui-content" style="text-align: center;">
+    <h2>녹화 영상</h2>
+    <ul data-role="listview" data-inset="true" id="videoList">
+    </ul>
+      <video width="320" height="240" controls>
+          <source src="{{ url_for('static', filename='video/t.mp4') }}" type="video/mp4">
+      </video>
+  </div>
+    {% include 'footer.html' %}
+</div>
+</body>
+</html>
