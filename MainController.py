@@ -121,7 +121,7 @@ def index():
         result = render_template('main.html')
     return result
 
-@app.route('/setting')
+@app.before_request
 def setting():
     th1 = Thread(target=imgs.getImgStart)
     th1.daemon = True
