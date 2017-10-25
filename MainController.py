@@ -1,72 +1,89 @@
 # coding: utf-8
-import DBController as DBC
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for, Response
+from flask import Flask, render_template, request, jsonify, Response
 from threading import Thread
 import streaming as st
 import picSetting
 import directory
 import motion
-import imgs
 import time
+import imgs
+import os
 
 app = Flask(__name__)
-db = DBC.DBManager()
 
-# @app.before_request
-# def before_request():
-#     print("end", request.endpoint)
-#     if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw' and request.endpoint != 'static':
-#         return redirect(url_for('init'))
+def dataSelectID(id):
+    print(id, "조회")
 
-@app.route('/getAlaramData', methods=["GET"])
-def getAlaramData():
-    data = db.selectAlaramData()
-    return jsonify(data)
+def dataInsert(id, name, phone):
+    print(id, name, phone, "삽입")
 
-@app.route("/deleteAlaramData", methods=["POST"])
-def deleteAlaramData():
-    return jsonify({ 'result' : db.deleteAlaramData( request.form['no'] ) })
+def dataUpdate(id, name, phone):
+    print(id, name, phone, "수정")
 
-@app.route('/addAlaramData', methods=["POST"])
-def addAlaramData():
+def dataDelete(id):
+    print(id, "삭제")
 
-    subject = request.form['subject']
-    time = request.form['time']
+def dataSelectAll():
+    print("모든 데이터 조회")
 
-    result = db.insertAlaramData(subject, time)
-    no = db.getAlaramDataNo(subject, time)
+@app.route('/GET/ID', methods=["GET"])
+def get_id():
 
-    return jsonify({ 'result' : result.rowcount, "no" : no[0] })
+    id = request.args.get('id')
+    rs = dataSelectID(id)
 
-@app.route('/chkpw', methods=["POST"])
-def chkpw():
-
-    pw = request.form['pw']
-    cnt = db.comparePW(pw)
-
-    if cnt > 0:
-        session['username'] = str(db.selectUserName())
-
-    result = jsonify( {"result" : cnt})
+    try:
+        result = jsonify( {"result" : "success", "id" : rs[0], "name" : rs[1], "phone" : rs[2]} )
+    except:
+        result = jsonify({"result": "fail"})
     return result
 
-@app.route('/changepw', methods=["POST"])
-def updatepw():
+@app.route("/POST/CREATEID", methods=["POST"])
+def create_id():
+    id = request.form['id']
+    name = request.form['name']
+    phone = request.form['phone']
 
-    curpw = request.form['currentpw']
-    chpw = request.form['chpw']
+    result = dataInsert(id, name, phone)
+    return jsonify({"result" : result})
 
-    result = jsonify( {"result" : str(db.updatePW(curpw, chpw)) })
-    return result
+@app.route("/PUT/UPDATEID", methods=["POST"])
+def update_id():
+    id = request.form['id']
+    name = request.form['name']
+    phone = request.form['phone']
+
+    result = dataUpdate(id, name, phone)
+    return jsonify({"result" : result})
+
+@app.route("/DELETE/DELETEID", methods=["POST"])
+def delete_id():
+    id = request.form['id']
+
+    result = dataDelete(id)
+    return jsonify({"result" : result})
+
+@app.route("/GET/ALLID", methods=["POST"])
+def get_allid():
+    #result = jsonify( {"result" : "success", "id" : rs[0], "name" : rs[1], "phone" : rs[2]} )
+
+    result = []
+
+    data = dataSelectAll()
+    for item in data:
+        result.append({"id" : item[0], "name" : item[1], "phone" : item[2]})
+
+    print(result)
+
+    return jsonify(result)
 
 @app.route('/demo')
 def demo():
-    result = render_template('demo.html')
-    return result
+    return render_template('demo.html')
 
-@app.route("/record")
-def record():
-    return render_template('record.html')
+@app.route("/video")
+def video():
+    return render_template('video.html')
 
 @app.route('/main')
 def main():
@@ -88,6 +105,14 @@ def cctv():
 def streming():
     return render_template('streaming.html')
 
+@app.route('/chart')
+def chart():
+    return render_template('chart.html')
+
+@app.route('/')
+def init():
+    return render_template('init.html')
+
 @app.route('/video_feed')
 def video_feed():
     img = st.gen()
@@ -100,29 +125,12 @@ def video_feed():
 
     return result
 
-@app.route('/videoList')
-def videoList():
-    list = {'video' : directory.getList()}
-    return jsonify(list)
+@app.route('/test')
+def test():
+    return render_template("record.html")
 
-@app.route('/chart')
-def chart():
-    return render_template('chart.html')
-
-@app.route('/init')
-def init():
-    return render_template('init.html')
-
-@app.route('/')
-def index():
-    result = render_template('init.html')
-
-    if 'username' in session:
-        result = render_template('main.html')
-    return result
-
-@app.before_request
-def setting():
+@app.before_first_request
+def mo():
     th1 = Thread(target=imgs.getImgStart)
     th1.daemon = True
     th1.start()
@@ -134,8 +142,19 @@ def setting():
     th2.daemon = True
     th2.start()
 
+@app.route('/record')
+def recod():
+
+    return render_template('record.html')
+
+@app.route('/videoList')
+def videoList():
+    list = {'video' : directory.getList()}
+    return jsonify(list)
+
+
 if __name__ == "__main__":
     picSetting.setting()
-    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run(debug=True, host="0.0.0.0", port=8888, threaded = True)
+
+    app.run(debug=True, host="0.0.0.0", port=8888)
     print("Server shutdown..")
