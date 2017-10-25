@@ -1,8 +1,8 @@
 #coding:utf-8
 import time
+from datetime import datetime
 import cv2
 import imgs
-from datetime import datetime
 from threading import Thread
 
 thresh = 32
@@ -52,8 +52,7 @@ def release(out):
 
 def getOutput(frame):
     h, w, _ = frame.shape
-    out = cv2.VideoWriter('static/video/' + str(datetime.now().strftime('%Y-%m-%d/%H:%M:%S')) + '.mp4', fourcc, 28,
-                          (w, h), True)
+    out = cv2.VideoWriter('static/video/' + str(datetime.now().strftime('%Y-%m-%d/%H:%M:%S')) + '.mp4', fourcc, 28, (w, h), True)
 
     return out
 
