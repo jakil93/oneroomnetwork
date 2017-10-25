@@ -133,7 +133,6 @@ def setting():
     th2 = Thread(target=motion.start)
     th2.daemon = True
     th2.start()
-    return "setting"
 
 if __name__ == "__main__":
     picSetting.setting()
