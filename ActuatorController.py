@@ -111,9 +111,11 @@ class ActuatorController:
 
 if __name__ == "__main__":
     a = ActuatorController()
-    a.buzz_play(2)
-    print("하하")
+
+    # a.buzz_play(2)
+    # print("하하")
 
     print(a.getDHTInfo())
-    a.doServo(100)
+
+    a.doServo(0)
     print("뭔데?")
