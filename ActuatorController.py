@@ -1,17 +1,32 @@
 #coding:utf-8
 
 import RPi.GPIO as GPIO
-import time
+import time, Adafruit_DHT
 
 class ActuatorController:
     def __init__(self):
 
+        #set pin
+        self.dht_pin = 23
         self.buzzer_pin = 24
+
+        #set etc
+        self.dht_sensor = Adafruit_DHT.DHT11
 
         GPIO.setmode(GPIO.BCM)
 
         GPIO.setup(self.buzzer_pin, GPIO.IN)
         GPIO.setup(self.buzzer_pin, GPIO.OUT)
+
+    def getDHTInfo(self):
+        humi, temp = Adafruit_DHT.read_retry(self.sensor, self.dht_pin)
+
+        while(humi is None):
+            print("getDHTInfo 재시도..")
+            humi, temp = Adafruit_DHT.read_retry(self.dht_sensor, self.dht_pin)
+
+        return humi, temp
+
 
     def buzz(self, pitch, duration):
         if pitch == 0:
