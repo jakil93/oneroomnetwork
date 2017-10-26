@@ -1,7 +1,7 @@
 #coding:utf-8
 
 import RPi.GPIO as GPIO
-import time, Adafruit_DHT
+import time, Adafruit_DHT, sys
 
 class ActuatorController:
     def __init__(self):
@@ -25,9 +25,9 @@ class ActuatorController:
 
         self.p = GPIO.PWM(self.servo_pin, 50)
         self.p.start(0)
+        self.p.ChangeDutyCycle(0)
 
     def doServo(self, angle):
-
         self.p.ChangeDutyCycle(angle)
         #self.p.stop()
 
@@ -113,8 +113,17 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    for i in range(90):
+    print(sys.argv)
+
+    if len(sys.argv) != 2:
+        print("파라미터 줘라")
+        exit(0)
+
+    cnt = int(sys.argv[1])
+
+    for i in range(cnt):
         a.doServo(i)
         time.sleep(0.1)
+        print(i)
 
     print("뭔데?")
