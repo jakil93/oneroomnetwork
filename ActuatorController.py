@@ -129,3 +129,8 @@ if __name__ == "__main__":
 
     if cnt == 1:
         a.closeWindow()
+        print("열었다")
+    else:
+        a.openWindow()
+        print("닫았다")
+        
