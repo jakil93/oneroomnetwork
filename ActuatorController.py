@@ -115,14 +115,13 @@ if __name__ == "__main__":
 
     print(sys.argv)
 
-    if len(sys.argv) != 1:
+    if len(sys.argv) != 2:
         print("파라미터 줘라")
         exit(0)
 
-    cnt = sys.argv[1]
-    print(cnt + "각도 까지..")
+    cnt = int(sys.argv[1])
 
-    for i in range(int(cnt)):
+    for i in range(cnt):
         a.doServo(i)
         time.sleep(0.1)
         print(i)
