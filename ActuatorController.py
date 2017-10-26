@@ -6,9 +6,14 @@ import time, Adafruit_DHT
 class ActuatorController:
     def __init__(self):
 
+        #init
+        GPIO.cleanup()
+
         #set pin
         self.dht_pin = 23
         self.buzzer_pin = 24
+        self.servo_pin = 18
+
 
         #set etc
         self.dht_sensor = Adafruit_DHT.DHT11
@@ -17,6 +22,18 @@ class ActuatorController:
 
         GPIO.setup(self.buzzer_pin, GPIO.IN)
         GPIO.setup(self.buzzer_pin, GPIO.OUT)
+        GPIO.setup(self.servo_pin, GPIO.OUT)
+
+
+    def doServo(self, angle):
+        p = GPIO.PWM(self.servo_pin, 50)
+        p.start(0)
+
+        time.sleep(2)
+        print("다른거")
+        p.ChangeDutyCycle(angle)
+
+        p.stop()
 
     def getDHTInfo(self):
         humi, temp = Adafruit_DHT.read_retry(self.dht_sensor, self.dht_pin)
@@ -98,3 +115,4 @@ if __name__ == "__main__":
     print("하하")
 
     print(a.getDHTInfo())
+    a.doServo(180)
