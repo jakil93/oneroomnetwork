@@ -50,7 +50,7 @@ class DBManager:
     def insertData(self):
         cur = self.conn.cursor()
         sql = "insert into customer(name, category, region) values (?, ?, ?)"
-        cur.execute(sql, ('kty', 1, 'busan'))
+        cur.execute(sql, ('강태영', 1, '부산'))
         self.conn.commit()
 
     def createAlaramTable(self):
@@ -115,7 +115,7 @@ class DBManager:
     def insertUserTable(self):
         cur = self.conn.cursor()
         sql = "INSERT INTO user(name, pw) VALUES(?, ?)"
-        cur.execute(sql, ('kty', '1234'))
+        cur.execute(sql, ('강태영', '1234'))
         self.conn.commit()
 
 
