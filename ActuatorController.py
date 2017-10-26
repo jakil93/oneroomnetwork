@@ -14,7 +14,6 @@ class ActuatorController:
         self.buzzer_pin = 24
         self.servo_pin = 18
 
-
         #set etc
         self.dht_sensor = Adafruit_DHT.DHT11
 
@@ -28,11 +27,7 @@ class ActuatorController:
     def doServo(self, angle):
         p = GPIO.PWM(self.servo_pin, 50)
         p.start(0)
-
-        time.sleep(2)
-        print("다른거")
         p.ChangeDutyCycle(angle)
-
         p.stop()
 
     def getDHTInfo(self):
@@ -117,5 +112,8 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    a.doServo(0)
+    for i in range(100):
+        a.doServo(i)
+        time.sleep(0.1)
+
     print("뭔데?")
