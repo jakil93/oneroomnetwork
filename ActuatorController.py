@@ -113,9 +113,9 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    # for i in range(20):
-    #     a.doServo(i)
-    #     time.sleep(0.1)
-    #     print(i)
+    for i in range(20):
+        a.doServo(i)
+        time.sleep(0.1)
+        print(i)
 
     print("뭔데?")
