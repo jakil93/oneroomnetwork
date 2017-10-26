@@ -115,5 +115,5 @@ if __name__ == "__main__":
     print("하하")
 
     print(a.getDHTInfo())
-    a.doServo(180)
+    a.doServo(100)
     print("뭔데?")
