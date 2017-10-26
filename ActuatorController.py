@@ -23,12 +23,13 @@ class ActuatorController:
         GPIO.setup(self.buzzer_pin, GPIO.OUT)
         GPIO.setup(self.servo_pin, GPIO.OUT)
 
+        self.p = GPIO.PWM(self.servo_pin, 50)
+        self.p.start(0)
 
     def doServo(self, angle):
-        p = GPIO.PWM(self.servo_pin, 50)
-        p.start(0)
-        p.ChangeDutyCycle(angle)
-        p.stop()
+
+        self.p.ChangeDutyCycle(angle)
+        #self.p.stop()
 
     def getDHTInfo(self):
         humi, temp = Adafruit_DHT.read_retry(self.dht_sensor, self.dht_pin)
