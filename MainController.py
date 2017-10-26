@@ -12,11 +12,11 @@ import time
 app = Flask(__name__)
 db = DBC.DBManager()
 
-# @app.before_request
-# def before_request():
-#     print("end", request.endpoint)
-#     if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw' and request.endpoint != 'static':
-#         return redirect(url_for('init'))
+@app.before_request
+def before_request():
+    print("end", request.endpoint)
+    if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw' and request.endpoint != 'static':
+        return redirect(url_for('init'))
 
 @app.route('/getAlaramData', methods=["GET"])
 def getAlaramData():
