@@ -19,7 +19,7 @@ class ActuatorController:
         GPIO.setup(self.buzzer_pin, GPIO.OUT)
 
     def getDHTInfo(self):
-        humi, temp = Adafruit_DHT.read_retry(self.sensor, self.dht_pin)
+        humi, temp = Adafruit_DHT.read_retry(self.dht_sensor, self.dht_pin)
 
         while(humi is None):
             print("getDHTInfo 재시도..")
