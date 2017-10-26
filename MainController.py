@@ -45,7 +45,6 @@ def chkpw():
     cnt = db.comparePW(pw)
 
     if cnt > 0:
-        print(db.selectUserName())
         session['username'] = str(db.selectUserName())
 
     result = jsonify( {"result" : cnt})
