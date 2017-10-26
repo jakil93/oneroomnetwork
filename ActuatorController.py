@@ -113,7 +113,7 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    for i in range(11):
+    for i in range(14):
         a.doServo(i)
         time.sleep(0.1)
         print(i)
