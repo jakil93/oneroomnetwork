@@ -116,5 +116,6 @@ if __name__ == "__main__":
     for i in range(90):
         a.doServo(i)
         time.sleep(0.1)
+        print(i)
 
     print("뭔데?")
