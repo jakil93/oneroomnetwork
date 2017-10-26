@@ -1,7 +1,7 @@
 #coding:utf-8
 
 import RPi.GPIO as GPIO
-import time, Adafruit_DHT
+import time, Adafruit_DHT, sys
 
 class ActuatorController:
     def __init__(self):
@@ -113,7 +113,12 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    for i in range(14):
+    if len(sys.argv != 1):
+        print("파라미터 줘라")
+
+    cnt = sys.argv[0]
+
+    for i in range(int(cnt)):
         a.doServo(i)
         time.sleep(0.1)
         print(i)
