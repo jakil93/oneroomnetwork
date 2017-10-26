@@ -126,12 +126,6 @@ if __name__ == "__main__":
 
     cnt = int(sys.argv[1])
 
-    if(cnt == 1):
-        for i in range(6):
-            a.doServo(i)
-            time.sleep(0.1)
-    else:
-        for i in range(6, 12):
-            a.doServo(i)
-            time.sleep(0.1)
+    a.doServo(cnt)
+    print(cnt + "도..")
         
