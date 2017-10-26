@@ -7,6 +7,7 @@ class ActuatorController:
     def __init__(self):
 
         #init
+        GPIO.setwarnings(False)
         GPIO.cleanup()
 
         #set pin
@@ -119,18 +120,11 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    print(sys.argv)
-
     if len(sys.argv) != 2:
         print("파라미터 줘라")
         exit(0)
 
     cnt = int(sys.argv[1])
 
-    if cnt == 1:
-        a.closeWindow()
-        print("열었다")
-    else:
-        a.openWindow()
-        print("닫았다")
+    a.doServo(100)
         
