@@ -142,6 +142,7 @@ def mo():
     th2.daemon = True
     th2.start()
 
+
 @app.route('/record')
 def recod():
 
