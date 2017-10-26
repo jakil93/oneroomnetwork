@@ -113,7 +113,7 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    if len(sys.argv != 1):
+    if len(sys.argv) != 1:
         print("파라미터 줘라")
 
     cnt = sys.argv[0]
