@@ -131,7 +131,7 @@ if __name__ == "__main__":
             a.doServo(i)
             time.sleep(0.1)
     else:
-        for i in range(12):
+        for i in range(6, 12):
             a.doServo(i)
             time.sleep(0.1)
         
