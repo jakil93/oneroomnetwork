@@ -1,5 +1,5 @@
 # coding: utf-8
-import DBController as DBC
+# import DBController as DBC
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, Response
 from threading import Thread
 import streaming as st
@@ -10,54 +10,54 @@ import imgs
 import time
 
 app = Flask(__name__)
-db = DBC.DBManager()
+# db = DBC.DBManager()
 
 # @app.before_request
 # def before_request():
 #     print("end", request.endpoint)
 #     if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw' and request.endpoint != 'static':
 #         return redirect(url_for('init'))
-
-@app.route('/getAlaramData', methods=["GET"])
-def getAlaramData():
-    data = db.selectAlaramData()
-    return jsonify(data)
-
-@app.route("/deleteAlaramData", methods=["POST"])
-def deleteAlaramData():
-    return jsonify({ 'result' : db.deleteAlaramData( request.form['no'] ) })
-
-@app.route('/addAlaramData', methods=["POST"])
-def addAlaramData():
-
-    subject = request.form['subject']
-    time = request.form['time']
-
-    result = db.insertAlaramData(subject, time)
-    no = db.getAlaramDataNo(subject, time)
-
-    return jsonify({ 'result' : result.rowcount, "no" : no[0] })
-
-@app.route('/chkpw', methods=["POST"])
-def chkpw():
-
-    pw = request.form['pw']
-    cnt = db.comparePW(pw)
-
-    if cnt > 0:
-        session['username'] = str(db.selectUserName())
-
-    result = jsonify( {"result" : cnt})
-    return result
-
-@app.route('/changepw', methods=["POST"])
-def updatepw():
-
-    curpw = request.form['currentpw']
-    chpw = request.form['chpw']
-
-    result = jsonify( {"result" : str(db.updatePW(curpw, chpw)) })
-    return result
+#
+# @app.route('/getAlaramData', methods=["GET"])
+# def getAlaramData():
+#     data = db.selectAlaramData()
+#     return jsonify(data)
+#
+# @app.route("/deleteAlaramData", methods=["POST"])
+# def deleteAlaramData():
+#     return jsonify({ 'result' : db.deleteAlaramData( request.form['no'] ) })
+#
+# @app.route('/addAlaramData', methods=["POST"])
+# def addAlaramData():
+#
+#     subject = request.form['subject']
+#     time = request.form['time']
+#
+#     result = db.insertAlaramData(subject, time)
+#     no = db.getAlaramDataNo(subject, time)
+#
+#     return jsonify({ 'result' : result.rowcount, "no" : no[0] })
+#
+# @app.route('/chkpw', methods=["POST"])
+# def chkpw():
+#
+#     pw = request.form['pw']
+#     cnt = db.comparePW(pw)
+#
+#     if cnt > 0:
+#         session['username'] = str(db.selectUserName())
+#
+#     result = jsonify( {"result" : cnt})
+#     return result
+#
+# @app.route('/changepw', methods=["POST"])
+# def updatepw():
+#
+#     curpw = request.form['currentpw']
+#     chpw = request.form['chpw']
+#
+#     result = jsonify( {"result" : str(db.updatePW(curpw, chpw)) })
+#     return result
 
 @app.route('/demo')
 def demo():
@@ -137,5 +137,5 @@ def setting():
 if __name__ == "__main__":
     picSetting.setting()
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run(debug=True, host="0.0.0.0", port=8888, threaded = True)
+    app.run(debug=True, host="0.0.0.0", port=8888)
     print("Server shutdown..")
