@@ -1,5 +1,5 @@
 # coding: utf-8
-import DBController as DBC
+# import DBController as DBC
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, Response
 from threading import Thread
 import streaming as st
@@ -10,7 +10,7 @@ import imgs
 import time
 
 app = Flask(__name__)
-db = DBC.DBManager()
+# db = DBC.DBManager()
 
 # @app.before_request
 # def before_request():
@@ -136,6 +136,6 @@ def setting():
 
 if __name__ == "__main__":
     picSetting.setting()
-    # app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(debug=True, host="0.0.0.0", port=8888)
     print("Server shutdown..")
