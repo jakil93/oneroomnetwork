@@ -113,13 +113,16 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
+    print(sys.argv)
+
     if len(sys.argv) != 1:
         print("파라미터 줘라")
+        exit(0)
 
-    cnt = sys.argv[0]
+    cnt = sys.argv[1]
     print(cnt + "각도 까지..")
 
-    for i in range(cnt):
+    for i in range(int(cnt)):
         a.doServo(i)
         time.sleep(0.1)
         print(i)
