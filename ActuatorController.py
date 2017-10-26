@@ -31,6 +31,12 @@ class ActuatorController:
         self.p.ChangeDutyCycle(angle)
         #self.p.stop()
 
+    def closeWindow(self):
+        self.p.ChangeDutyCycle(0)
+
+    def openWindow(self):
+        self.p.ChangeDutyCycle(12)
+
     def getDHTInfo(self):
         humi, temp = Adafruit_DHT.read_retry(self.dht_sensor, self.dht_pin)
 
@@ -121,9 +127,10 @@ if __name__ == "__main__":
 
     cnt = int(sys.argv[1])
 
-    for i in range(cnt):
-        a.doServo(i)
-        time.sleep(0.1)
-        print(i)
-
-    print("뭔데?")
+    if cnt == 1:
+        a.closeWindow()
+        print("열었다")
+    else:
+        a.openWindow()
+        print("닫았다")
+        
