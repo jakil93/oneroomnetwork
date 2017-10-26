@@ -137,5 +137,5 @@ def setting():
 if __name__ == "__main__":
     picSetting.setting()
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run(debug=True, host="0.0.0.0", port=8888, threaded = True)
+    app.run(debug=True, host="0.0.0.0", port=8888)
     print("Server shutdown..")
