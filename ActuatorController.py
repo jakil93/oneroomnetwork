@@ -96,3 +96,5 @@ if __name__ == "__main__":
     a = ActuatorController()
     a.buzz_play(1)
     print("하하")
+
+    print(a.getDHTInfo())
