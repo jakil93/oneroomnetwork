@@ -126,5 +126,12 @@ if __name__ == "__main__":
 
     cnt = int(sys.argv[1])
 
-    a.doServo(100)
+    if(cnt == 1):
+        for i in range(1):
+            a.doServo(i)
+            time.sleep(0.1)
+    else:
+        for i in range(12):
+            a.doServo(i)
+            time.sleep(0.1)
         
