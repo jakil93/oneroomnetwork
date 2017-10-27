@@ -30,7 +30,7 @@ def getAlaramData():
     datas.append({'no' : 1, 'subject' : "abc", 'time' : "07:00"})
     datas.append({'no' : 2, 'subject' : "def", 'time' : "08:00"})
 
-    return datas
+    return str(datas)
 
 
 
