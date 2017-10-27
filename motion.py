@@ -49,11 +49,11 @@ def recording(out):
 
 def release(out):
     out.release()
+    print("release")
 
 def getOutput(frame):
     h, w, _ = frame.shape
     out = cv2.VideoWriter('static/video/' + str(datetime.now().strftime('%Y-%m-%d:%H%M%S')) + '.mp4', fourcc, 60, (w, h), True)
-
     return out
 
 def motionCheck():
