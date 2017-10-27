@@ -156,8 +156,10 @@ if __name__ == "__main__":
         try:
             cnt = input("Up : 1, Down : 0 \n")
             if(cnt == 1):
+                print(1)
                 a.curtainUp()
             elif(cnt == 0):
+                print(0)
                 a.curtainDown()
         except :
             break;
