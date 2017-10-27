@@ -27,7 +27,7 @@ class ActuatorController:
         self.p = GPIO.PWM(self.servo_pin, 50)
 
     def doServo(self, angle):
-        self.p.start(0)
+        self.p.start(4)
         self.p.ChangeDutyCycle(angle)
         self.p.stop()
 
@@ -119,11 +119,7 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    if len(sys.argv) != 2:
-        print("파라미터 줘라")
-        exit(0)
-
-    cnt = int(sys.argv[1])
+    cnt = input("각도 1 ~ 12")
 
     a.doServo(cnt)
     print(cnt + "도..")
