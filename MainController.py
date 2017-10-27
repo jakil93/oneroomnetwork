@@ -21,10 +21,10 @@ def before_request():
 @app.route('/getAlaramData', methods=["GET"])
 def getAlaramData():
 
-    #data = db.selectAlaramData()
+    data = db.selectAlaramData()
     #return jsonify(data)
 
-    return jsonify({'no' : 1, 'subject' : u"기상", 'time' : "07:00"})
+    return jsonify([{'no' : 1, 'subject' : u"기상", 'time' : "07:00"}])
 
 @app.route("/deleteAlaramData", methods=["POST"])
 def deleteAlaramData():
