@@ -21,6 +21,7 @@ def before_request():
 @app.route('/getAlaramData', methods=["GET"])
 def getAlaramData():
     data = db.selectAlaramData()
+    print("알람데이터", data)
     return jsonify(data)
 
 @app.route("/deleteAlaramData", methods=["POST"])
