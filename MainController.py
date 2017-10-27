@@ -8,6 +8,7 @@ import directory
 import motion
 import imgs
 import time
+import json
 
 app = Flask(__name__)
 db = DBC.DBManager()
@@ -26,6 +27,7 @@ def getAlaramData():
     print("------")
 
     datas = [{'no' : 1, 'subject' : u"기상", 'time' : "07:00"}, {'no' : 2, 'subject' : u"아침밥", 'time' : "08:00"}]
+    datas = json.dumps(datas, ensure_ascii=False)
     return jsonify(datas)
 
 
