@@ -29,6 +29,7 @@ class ActuatorController:
     def doServo(self, angle):
         self.p.start(4)
         self.p.ChangeDutyCycle(angle)
+        time.sleep(1)
         self.p.stop()
 
     def closeWindow(self):
