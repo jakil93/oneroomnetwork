@@ -119,9 +119,13 @@ if __name__ == "__main__":
     # print("하하")
 
     print(a.getDHTInfo())
+    while True:
+        try:
+            cnt = input("각도 1 ~ 12 : ")
 
-    cnt = input("각도 1 ~ 12 : ")
 
-    a.doServo(cnt)
-    print(str(cnt) + "도..")
+            a.doServo(cnt)
+            print(str(cnt) + "도..")
+        except :
+            break;
         
