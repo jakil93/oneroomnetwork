@@ -128,7 +128,7 @@ if __name__ == "__main__":
     print(a.getDHTInfo())
     while True:
         try:
-            cnt = input("open : 1, close : 1 \n")
+            cnt = input("open : 1, close : 0 \n")
             if(cnt == 1):
                 a.openWindow()
             elif(cnt == 0):
