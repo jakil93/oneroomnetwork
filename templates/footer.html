@@ -16,7 +16,7 @@
 </style>
 
 <div class="homeBtn" data-role="button" onclick="location.href='main'">
-    <div style="font-size: 10pt" align="right">
+    <div id="dhtInfoDiv" style="font-size: 10pt" align="right">
         온도 : 27도<br>
         습도 : 27％
     </div>
@@ -24,6 +24,16 @@
 
 <script type="text/javascript">
     function getRoomInfo(){
-        
+        $.ajax({
+            url : "getDHT11",
+            method : "POST",
+            dataType : "json",
+            success : function(data){
+                $("#dhtInfoDiv").html("온도 : " + data.temp + "<br>습도 : " + data.humi );
+            },
+            error : function(){
+                alert("온습도 정보를 가져오지 못했습니다.");
+            }
+        });
     }
 </script>
