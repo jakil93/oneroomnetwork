@@ -26,6 +26,9 @@ class ActuatorController:
 
         self.p = GPIO.PWM(self.servo_pin, 50)
         self.p.start(4)
+        self.p.ChangeDutyCycle(2)
+        time.sleep(1)
+        self.p.ChangeDutyCycle(0)
 
     def doServo(self, angle):
         self.p.ChangeDutyCycle(angle)
