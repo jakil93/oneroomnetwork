@@ -119,8 +119,8 @@ if __name__ == "__main__":
 
     print(a.getDHTInfo())
 
-    cnt = input("각도 1 ~ 12")
+    cnt = input("각도 1 ~ 12 : ")
 
-    a.doServo(cnt)
+    a.doServo(int(cnt))
     print(cnt + "도..")
         
