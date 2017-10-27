@@ -13,6 +13,7 @@ i0 = ''
 i1 = ''
 i2 = ''
 set = False
+fr = 16
 
 
 def diffImage(i0, i1, i2):
@@ -36,24 +37,28 @@ def grayImg(img):
     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     return gray
 
-def recording(out):
+def recording(frames):
+    frames.append()
+
     cnt = 1
     tt = time.time()
-    while cnt < 16*5:
-        frame = getImg()
-        out.write(frame)
+    while cnt < fr*5:
+        frames.append(getImg())
+        time.sleep(1/fr)
         cnt += 1
 
     tt = time.time() - tt
-    print(tt)
+    return frames
 
-def release(out):
+def release(out, frames):
+    for frame in frames:
+        out.write(frame)
     out.release()
     print("release")
 
 def getOutput(frame):
     h, w, _ = frame.shape
-    out = cv2.VideoWriter('static/video/' + str(datetime.now().strftime('%Y-%m-%d:%H%M%S')) + '.mp4', fourcc, 16, (w, h), True)
+    out = cv2.VideoWriter('static/video/' + str(datetime.now().strftime('%Y-%m-%d:%H%M%S')) + '.mp4', fourcc, fr, (w, h), True)
     return out
 
 def motionCheck():
@@ -81,16 +86,17 @@ def start():
     while True:
         count = motionCheck()
         if(count > 1):
+            frames = []
             tt = time.time()
             print('시작')
             out = getOutput(img)
             while True:
                 print('계속')
-                recording(out)
+                frames = recording(frames)
                 count = motionCheck()
                 if not(count > 1):
 
-                    th = Thread(target=release, args=[out])
+                    th = Thread(target=release, args=(out, frames))
                     th.start()
 
                     print('종료')
