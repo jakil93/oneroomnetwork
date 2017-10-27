@@ -16,7 +16,7 @@ class ActuatorController:
         self.servo_pin = 18
         self.dc_pin1 = 20
         self.dc_pin2 = 21
-        self.current_curtain;
+        self.current_curtain = "";
 
         #set etc
         self.dht_sensor = Adafruit_DHT.DHT11
