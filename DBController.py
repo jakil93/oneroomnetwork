@@ -3,7 +3,7 @@ import sqlite3, json
 
 class DBManager:
     def __init__(self):
-        self.conn = sqlite3.connect('test.db', check_same_thread=False)
+        self.conn = sqlite3.connect('oneroom.db', check_same_thread=False)
 
     def selectUserName(self):
         cur = self.conn.cursor()
@@ -132,5 +132,5 @@ class DBManager:
 
 if __name__ == "__main__":
     db = DBManager()
-    data = db.selectAlaramData()
-    pass
+    # data = db.selectAlaramData()
+    # pass
