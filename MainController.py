@@ -27,8 +27,8 @@ def getAlaramData():
     print(u"------ 잘됬다.")
 
     datas = []
-    datas.append({'no' : 1, 'subject' : "abc", 'time' : "07:00"})
-    datas.append({'no' : 2, 'subject' : "def", 'time' : "08:00"})
+    datas.append({'no' : 1, 'subject' : "기상", 'time' : "07:00"})
+    datas.append({'no' : 2, 'subject' : "출근", 'time' : "08:00"})
 
     return str(datas)
 
