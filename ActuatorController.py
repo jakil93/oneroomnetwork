@@ -14,6 +14,8 @@ class ActuatorController:
         self.dht_pin = 23
         self.buzzer_pin = 24
         self.servo_pin = 18
+        self.dc_pin1 = 20
+        self.dc_pin2 = 21
 
         #set etc
         self.dht_sensor = Adafruit_DHT.DHT11
