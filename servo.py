@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-pin = 18
+pin = 14
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.OUT)
 p = GPIO.PWM(pin, 50)
