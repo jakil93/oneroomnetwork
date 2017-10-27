@@ -1,10 +1,10 @@
 #coding:utf-8
-import sqlite3, sys
+import sqlite3
 
 class DBManager:
     def __init__(self):
-        sys.setdefaultencoding('utf-8')
         self.conn = sqlite3.connect('oneroom.db', check_same_thread=False)
+        self.conn.text_factory = str
 
     def selectUserName(self):
         cur = self.conn.cursor()
@@ -12,7 +12,8 @@ class DBManager:
         cur.execute(sql)
 
         name = cur.fetchone()[0]
-        name = name.decode('utf-8')
+
+
         #str(unicode('한글','euc-kr').encode('euc-kr')
 
         print("이름은 " + str(name))
