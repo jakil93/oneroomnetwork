@@ -1,8 +1,9 @@
 #coding:utf-8
-import sqlite3, json
+import sqlite3, sys
 
 class DBManager:
     def __init__(self):
+        sys.setdefaultencoding('utf-8')
         self.conn = sqlite3.connect('oneroom.db', check_same_thread=False)
 
     def selectUserName(self):
