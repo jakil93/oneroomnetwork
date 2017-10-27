@@ -17,8 +17,8 @@ var = 1
 try:
     while True:
         var = input("input : ")
-        print(int(var))
-        p.start(int(var))
+        print(float(var))
+        p.start(float(var))
         time.sleep(1)
         p.stop()
 
