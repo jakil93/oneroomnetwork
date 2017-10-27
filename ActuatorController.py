@@ -37,18 +37,14 @@ class ActuatorController:
         self.p.ChangeDutyCycle(0)
 
     def curtainUp(self):
-        if(self.current_curtain != "up"):
-            GPIO.output(self.dc_pin1, 1)
-            time.sleep(1.2)
-            GPIO.output(self.dc_pin1, 0)
-        self.current_curtain = "up";
+        GPIO.output(self.dc_pin1, 1)
+        time.sleep(1.2)
+        GPIO.output(self.dc_pin1, 0)
 
     def curtainDown(self):
-        if (self.current_curtain != "down"):
-            GPIO.output(self.dc_pin2, 1)
-            time.sleep(1.2)
-            GPIO.output(self.dc_pin2, 0)
-        self.current_curtain = "down";
+        GPIO.output(self.dc_pin2, 1)
+        time.sleep(1.2)
+        GPIO.output(self.dc_pin2, 0)
 
     def doServo(self, angle):
         self.p.ChangeDutyCycle(angle)
