@@ -21,17 +21,8 @@ def before_request():
 
 @app.route('/getAlaramData', methods=["GET"])
 def getAlaramData():
-
     data = db.selectAlaramData()
-    print(data)
-    print(u"------ 잘됬다.")
-
-    datas = []
-    datas.append({'no' : 1, 'subject' : "기상", 'time' : "07:00"})
-    datas.append({'no' : 2, 'subject' : "출근", 'time' : "08:00"})
-
     return Response(json.dumps(data), mimetype='application/json')
-    #return str(datas)
 
 
 
