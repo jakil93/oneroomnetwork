@@ -11,7 +11,7 @@ class DBManager:
         cur.execute(sql)
 
         name = cur.fetchone()[0]
-        print("이름은 " + name)
+        print("이름은 " + str(name))
 
         return name
 
@@ -135,5 +135,6 @@ class DBManager:
 
 if __name__ == "__main__":
     db = DBManager()
+    db.selectUserName()
     # data = db.selectAlaramData()
     # pass
