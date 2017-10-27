@@ -128,11 +128,11 @@ if __name__ == "__main__":
     print(a.getDHTInfo())
     while True:
         try:
-            cnt = input("각도 1 ~ 12 : ")
-
-
-            a.doServo(cnt)
-            print(str(cnt) + "도..")
+            cnt = input("open : 1, close : 1 \n")
+            if(cnt == 1):
+                a.openWindow()
+            elif(cnt == 0):
+                a.closeWindow()
         except :
             break;
         
