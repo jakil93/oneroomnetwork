@@ -11,18 +11,11 @@ cnt = 0
 
 try:
     while True:
-        p.ChangeDutyCycle(1)
-        print
-        "angle : 1"
+        var = input("input : ")
+        p.ChangeDutyCycle(int(var))
+        print("angle :",int(var))
         time.sleep(1)
-        p.ChangeDutyCycle(5)
-        print
-        "angle : 5"
-        time.sleep(1)
-        p.ChangeDutyCycle(8)
-        print
-        "angle : 8"
-        time.sleep(1)
+        
 except KeyboardInterrupt:
     p.stop()
 GPIO.cleanup()
