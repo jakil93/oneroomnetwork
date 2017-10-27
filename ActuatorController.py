@@ -121,6 +121,6 @@ if __name__ == "__main__":
 
     cnt = input("각도 1 ~ 12 : ")
 
-    a.doServo(int(cnt))
-    print(cnt + "도..")
+    a.doServo(cnt)
+    print(str(cnt) + "도..")
         
