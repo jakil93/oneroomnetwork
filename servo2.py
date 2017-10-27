@@ -15,7 +15,8 @@ try:
         p.ChangeDutyCycle(int(var))
         print("angle :",int(var))
         time.sleep(1)
-        
+        p.stop()
+
 except KeyboardInterrupt:
     p.stop()
 GPIO.cleanup()
