@@ -38,12 +38,12 @@ def grayImg(img):
     return gray
 
 def recording(frames):
-    cnt = 1
+    cnt = 0
     while cnt < fr*5:
         frames.append(getImg())
-        time.sleep(1/fr)
+        time.sleep(float(1) / float(fr))
         cnt += 1
-    print(1/fr)
+    print(10/fr)
     print(len(frames))
 
     return frames
