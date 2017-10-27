@@ -13,7 +13,7 @@ i0 = ''
 i1 = ''
 i2 = ''
 set = False
-fr = 16
+fr = 24
 
 
 def diffImage(i0, i1, i2):
@@ -43,7 +43,6 @@ def recording(frames):
         frames.append(getImg())
         time.sleep(float(1) / float(fr))
         cnt += 1
-    print(10/fr)
     print(len(frames))
 
     return frames
