@@ -30,12 +30,17 @@ class ActuatorController:
     def doServo(self, angle):
         self.p.ChangeDutyCycle(angle)
         time.sleep(1)
+        self.p.ChangeDutyCycle(0)
 
     def closeWindow(self):
+        self.p.ChangeDutyCycle(2)
+        time.sleep(1)
         self.p.ChangeDutyCycle(0)
 
     def openWindow(self):
-        self.p.ChangeDutyCycle(12)
+        self.p.ChangeDutyCycle(10)
+        time.sleep(1)
+        self.p.ChangeDutyCycle(0)
 
     def getDHTInfo(self):
         humi, temp = Adafruit_DHT.read_retry(self.dht_sensor, self.dht_pin)
