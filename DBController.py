@@ -93,6 +93,7 @@ class DBManager:
 
         result = []
         for row in rows:
+            print(row[0], row[1], row[2])
             result.append( {'no' : row[0], 'subject' : row[1], 'time' : row[2]} )
 
         return result
