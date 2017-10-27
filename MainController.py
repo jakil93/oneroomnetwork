@@ -21,14 +21,9 @@ def before_request():
 
 @app.route('/getAlaramData', methods=["GET"])
 def getAlaramData():
-
     data = db.selectAlaramData()
-    print(data)
-    print("------")
+    return Response(json.dumps(data), mimetype='application/json')
 
-    datas = [{'no' : 1, 'subject' : u"기상", 'time' : "07:00"}, {'no' : 2, 'subject' : u"아침밥", 'time' : "08:00"}]
-    datas = json.dumps(datas, ensure_ascii=False)
-    return jsonify(datas)
 
 
 @app.route("/deleteAlaramData", methods=["POST"])
