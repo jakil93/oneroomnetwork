@@ -3,15 +3,12 @@ import DBController as DBC
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, Response
 from threading import Thread
 import streaming as st
-import picSetting
-import directory
-import motion
-import imgs
-import time
-import json
+import picSetting, directory, motion, imgs, time, json, ActuatorController
+
 
 app = Flask(__name__)
 db = DBC.DBManager()
+actuator = ActuatorController.ActuatorController()
 
 @app.before_request
 def before_request():
@@ -32,7 +29,6 @@ def deleteAlaramData():
 
 @app.route('/addAlaramData', methods=["POST"])
 def addAlaramData():
-
     subject = request.form['subject']
     time = request.form['time']
 
@@ -40,6 +36,11 @@ def addAlaramData():
     no = db.getAlaramDataNo(subject, time)
 
     return jsonify({ 'result' : result.rowcount, "no" : no[0] })
+
+@app.route('/getDHT11', methods=["POST"])
+def getDHT11():
+    humi, temp = actuator.getDHTInfo()
+    return jsonify({'temp' : temp, "humi" : humi})
 
 @app.route('/chkpw', methods=["POST"])
 def chkpw():
