@@ -8,6 +8,7 @@ GPIO.setup(pin, GPIO.OUT)
 p = GPIO.PWM(pin, 50)
 p.start(0)
 cnt = 0
+
 try:
     while True:
         p.ChangeDutyCycle(1)
