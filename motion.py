@@ -43,7 +43,6 @@ def recording(out):
         frame = getImg()
         out.write(frame)
         cnt += 1
-        time.sleep(0.3)
 
     tt = time.time() - tt
     print(tt)
