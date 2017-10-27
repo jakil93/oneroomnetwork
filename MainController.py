@@ -30,7 +30,7 @@ def getAlaramData():
     datas.append({'no' : 1, 'subject' : "기상", 'time' : "07:00"})
     datas.append({'no' : 2, 'subject' : "출근", 'time' : "08:00"})
 
-    return Response(json.dumps(datas), mimetype='application/json')
+    return Response(json.dumps(data), mimetype='application/json')
     #return str(datas)
 
 
