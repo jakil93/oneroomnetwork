@@ -28,7 +28,7 @@
             method : "POST",
             dataType : "json",
             success : function(data){
-                $("#dhtInfoDiv").html("온도 : " + data.temp + "도<br>습도 : " + data.humi + "%");
+                $("#dhtInfoDiv").html("온도 : " + data.temp + "도<br>습도 : " + data.humi + "％");
             },
             error : function(){
                 alert("온습도 정보를 가져오지 못했습니다.");
