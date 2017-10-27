@@ -10,7 +10,10 @@ class DBManager:
         sql = "SELECT name FROM user WHERE no = 1"
         cur.execute(sql)
 
-        return cur.fetchone()[0]
+        name = cur.fetchone()[0]
+        print("이름은 " + name)
+
+        return name
 
     def updatePW(self, curpw, chpw):
 
