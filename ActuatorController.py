@@ -16,6 +16,7 @@ class ActuatorController:
         self.servo_pin = 18
         self.dc_pin1 = 20
         self.dc_pin2 = 21
+        self.current_curtain;
 
         #set etc
         self.dht_sensor = Adafruit_DHT.DHT11
@@ -26,11 +27,28 @@ class ActuatorController:
         GPIO.setup(self.buzzer_pin, GPIO.OUT)
         GPIO.setup(self.servo_pin, GPIO.OUT)
 
+        GPIO.setup(self.dc_pin1, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(self.dc_pin2, GPIO.OUT, initial=GPIO.LOW)
+
         self.p = GPIO.PWM(self.servo_pin, 50)
         self.p.start(4)
         self.p.ChangeDutyCycle(2)
         time.sleep(1)
         self.p.ChangeDutyCycle(0)
+
+    def curtainUp(self):
+        if(self.current_curtain != "up"):
+            GPIO.output(self.dc_pin1, 1)
+            time.sleep(1.2)
+            GPIO.output(self.dc_pin1, 0)
+        self.current_curtain = "up";
+
+    def curtainDown(self):
+        if (self.current_curtain != "down"):
+            GPIO.output(self.dc_pin2, 1)
+            time.sleep(1.2)
+            GPIO.output(self.dc_pin2, 0)
+        self.current_curtain = "down";
 
     def doServo(self, angle):
         self.p.ChangeDutyCycle(angle)
