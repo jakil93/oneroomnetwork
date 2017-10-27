@@ -16,7 +16,7 @@ class ActuatorController:
         self.servo_pin = 18
         self.dc_pin1 = 20
         self.dc_pin2 = 21
-        self.current_curtain;
+        self.current_curtain = "";
 
         #set etc
         self.dht_sensor = Adafruit_DHT.DHT11
@@ -146,13 +146,25 @@ if __name__ == "__main__":
     # print("하하")
 
     print(a.getDHTInfo())
+    # while True:
+    #     try:
+    #         cnt = input("open : 1, close : 0 \n")
+    #         if(cnt == 1):
+    #             a.openWindow()
+    #         elif(cnt == 0):
+    #             a.closeWindow()
+    #     except :
+    #         break;
+
     while True:
         try:
-            cnt = input("open : 1, close : 0 \n")
+            cnt = input("Up : 1, Down : 0 \n")
             if(cnt == 1):
-                a.openWindow()
+                a.curtainUp()
             elif(cnt == 0):
-                a.closeWindow()
+                a.curtainDown()
         except :
             break;
+
+
         
