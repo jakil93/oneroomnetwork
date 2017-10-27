@@ -140,6 +140,7 @@ class DBManager:
 
 if __name__ == "__main__":
     db = DBManager()
-    db.selectUserName()
-    # data = db.selectAlaramData()
+    #db.selectUserName()
+    data = db.selectAlaramData()
+    print(data)
     # pass
