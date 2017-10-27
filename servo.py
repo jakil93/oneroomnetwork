@@ -10,17 +10,16 @@ pre = 0
 
 try:
     while True:
-        with GPIO.PWM(pin,50) as p:
-            p.start(0)
-            var = input("input : ")
-            if(pre != int(var)):
-                p.ChangeDutyCycle(int(var))
-                print("angle :",int(var))
-            else:
-                print("keep")
-            pre = int(var)
-            time.sleep(1)
-            p.stop()
+        p = GPIO.PWM(pin,50)
+        p.start(0)
+        var = input("input : ")
+        if(pre != int(var)):
+            p.ChangeDutyCycle(int(var))
+            print("angle :",int(var))
+        else:
+            print("keep")
+        pre = int(var)
+        time.sleep(1)
 
 except KeyboardInterrupt:
     p.stop()
