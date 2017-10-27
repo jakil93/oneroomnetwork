@@ -11,6 +11,9 @@ class DBManager:
         cur.execute(sql)
 
         name = cur.fetchone()[0]
+        name = name.decode('utf-8')
+        #str(unicode('한글','euc-kr').encode('euc-kr')
+
         print("이름은 " + str(name))
 
         return name
