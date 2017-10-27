@@ -39,7 +39,7 @@ def grayImg(img):
 def recording(out):
     cnt = 1
     tt = time.time()
-    while cnt < 20*5:
+    while cnt < 60*5:
         frame = getImg()
         out.write(frame)
         cnt += 1
@@ -52,7 +52,7 @@ def release(out):
 
 def getOutput(frame):
     h, w, _ = frame.shape
-    out = cv2.VideoWriter('static/video/' + str(datetime.now().strftime('%Y-%m-%d:%H%M%S')) + '.mp4', fourcc, 20, (w, h), True)
+    out = cv2.VideoWriter('static/video/' + str(datetime.now().strftime('%Y-%m-%d:%H%M%S')) + '.mp4', fourcc, 60, (w, h), True)
 
     return out
 
