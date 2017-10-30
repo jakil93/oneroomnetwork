@@ -17,8 +17,24 @@
         })
 
         function reqCurtain(){
-            alert("하하");
-            alert($("#curtainBar").val());
+            var data = 0;
+            if($("#curtainBar").val() == "ON"){
+                data = 0;
+            }else{
+                data = 1;
+            }
+
+            $.ajax({
+                url : "reqCurtainControl",
+                method : "POST",
+                data : "flag=" + data,
+                success : function(data){
+                    alert("성공!");
+                },
+                error : function(){
+                    alert("실패!");
+                }
+            });
         }
 
 
