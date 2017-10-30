@@ -110,7 +110,7 @@ class DBManager:
 
     def updateAlaramData(self):
         cur = self.conn.cursor()
-        sql = "UPDATE alaram Set subject = '기상 시간' WHERE no = 1"
+        sql = "UPDATE alaram Set subject = 'wake up' WHERE no = 1"
         cur.execute(sql)
 
         self.conn.commit()
@@ -142,6 +142,7 @@ class DBManager:
 if __name__ == "__main__":
     db = DBManager()
     #db.selectUserName()
+    db.updateAlaramData()
     data = db.selectAlaramData()
     print(data)
     # pass
