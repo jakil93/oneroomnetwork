@@ -3,23 +3,25 @@
     <title>Streaming</title>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <style>
-        div{
-            text-align: center;
-        }
-        img{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            border: 10px solid black;
-        }
+        <!--div{-->
+            <!--text-align: center;-->
+        <!--}-->
+        <!--img{-->
+            <!--display: block;-->
+            <!--margin-left: auto;-->
+            <!--margin-right: auto;-->
+            <!--border: 10px solid black;-->
+        <!--}-->
+
+        html { background: url({{ url_for('video_feed') }}) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Streaming</h1>
-        <img src="{{ url_for('video_feed') }}">
-        <button>Feed</button>
-    </div>
+    <!--<div>-->
+        <!--<h1>Streaming</h1>-->
+        <!--<img src="{{ url_for('video_feed') }}">-->
+        <!--<button>Feed</button>-->
+    <!--</div>-->
 
     <script>
         $('button').click(function(){
