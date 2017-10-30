@@ -136,6 +136,18 @@ def index():
 
 @app.before_first_request
 def setting():
+    alaramDatas = db.readAlaramData()
+    for items in alaramDatas:
+        temp = ActuatorController.AlaramData(items[0], items[1], items[2])
+        actuator.alaramDatas.append(temp)
+
+    th = Thread(target=actuator.alaramManagementThread)
+    th.daemon = True
+    th.start()
+
+
+
+
     th1 = Thread(target=imgs.getImgStart)
     th1.daemon = True
     th1.start()
@@ -148,17 +160,6 @@ def setting():
     th2.start()
 
 if __name__ == "__main__":
-
-    alaramDatas = db.readAlaramData()
-    for items in alaramDatas:
-        temp = ActuatorController.AlaramData(items[0], items[1], items[2])
-        actuator.alaramDatas.append(temp)
-
-    th = Thread(target=actuator.alaramManagementThread)
-    th.daemon = True
-    th.start()
-
-
 
     picSetting.setting()
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
