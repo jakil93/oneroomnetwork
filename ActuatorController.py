@@ -157,7 +157,7 @@ class ActuatorController:
             for item in ActuatorController.alaramDatas:
                 if(item.time == currentTime):
                     self.buzz_play(1)
-
+            time.sleep(1)
 
 
 
