@@ -3,8 +3,22 @@
 import RPi.GPIO as GPIO
 import time, Adafruit_DHT, sys
 
+class AlaramData:
+    def __init__(self, no, subject, time):
+        self.no = no
+        self.subject = subject
+        self.time = time
+
+
+
 class ActuatorController:
+
+    alaramDatas = []
+
     def __init__(self):
+
+        #alaram Data Read
+
 
         #init
         GPIO.setwarnings(False)
@@ -134,6 +148,18 @@ class ActuatorController:
                 x+=1
 
         GPIO.setup(self.buzzer_pin, GPIO.IN)
+
+    def alaramManagementThread(self):
+        from datetime import datetime
+
+        while True:
+            currentTime = str(datetime.now().strftime('%H%M'))
+            for item in ActuatorController.alaramDatas:
+                if(item.time == currentTime):
+                    self.buzz_play(1)
+
+
+
 
 if __name__ == "__main__":
     a = ActuatorController()

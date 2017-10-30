@@ -25,7 +25,14 @@ def getAlaramData():
 
 @app.route("/deleteAlaramData", methods=["POST"])
 def deleteAlaramData():
-    return jsonify({ 'result' : db.deleteAlaramData( request.form['no'] ) })
+
+    no = db.deleteAlaramData( request.form['no'])
+
+    for items in actuator.alaramDatas:
+        if(no == items.no):
+            actuator.alaramDatas.remove(items)
+
+    return jsonify({ 'result' : no })
 
 @app.route('/addAlaramData', methods=["POST"])
 def addAlaramData():
@@ -35,6 +42,7 @@ def addAlaramData():
     result = db.insertAlaramData(subject, time)
     no = db.getAlaramDataNo(subject, time)
 
+    actuator.alaramDatas.append(no[0], subject, time)
     return jsonify({ 'result' : result.rowcount, "no" : no[0] })
 
 @app.route('/getDHT11', methods=["POST"])
@@ -140,6 +148,18 @@ def setting():
     th2.start()
 
 if __name__ == "__main__":
+
+    alaramDatas = db.selectAlaramData()
+    for items in alaramDatas:
+        temp = ActuatorController.AlaramData(items[0], items[1], items[2])
+        actuator.alaramDatas.append(temp)
+
+    th = Thread(target=actuator.alaramManagementThread)
+    th.daemon = True
+    th.start()
+
+
+
     picSetting.setting()
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(debug=True, host="0.0.0.0", port=8888)
