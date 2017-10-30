@@ -98,6 +98,14 @@ class DBManager:
 
         return result
 
+    def readAlaramData(self):
+
+        cur = self.conn.cursor()
+        sql = "SELECT * FROM alaram"
+        cur.execute(sql)
+        rows = cur.fetchall()
+        return rows
+
     def deleteAlaramData(self, no):
         cur = self.conn.cursor()
         sql = "DELETE FROM alaram WHERE no = ?"
