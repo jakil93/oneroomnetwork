@@ -19,13 +19,11 @@
 
         function reqCurtain(){
             var data = 0;
-            if($("#curtainBar").val() == "ON"){
+            if($("#curtainBar").val() == "on"){
                 data = 0;
             }else{
                 data = 1;
             }
-
-            alert($("#curtainBar").val() + "," +data);
 
             $.ajax({
                 url : "reqCurtainControl",
@@ -42,7 +40,7 @@
 
         function reqWindow(){
             var data = 0;
-            if($("#windowBar").val() == "ON"){
+            if($("#windowBar").val() == "on"){
                 data = 0;
             }else{
                 data = 1;
