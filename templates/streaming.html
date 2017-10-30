@@ -17,23 +17,7 @@
     </style>
 </head>
 <body>
-    <!--<div>-->
-        <!--<h1>Streaming</h1>-->
-        <!--<img src="{{ url_for('video_feed') }}">-->
-        <!--<button>Feed</button>-->
-    <!--</div>-->
-
-    <script>
-        $('button').click(function(){
-            $.get('video_feed')
-            .done(function(data){
-                if(data == '1'){
-                    alert('Success!');
-                }else{
-                    alert('Fail!');
-                }
-            });
-        });
-    </script>
+    {% include 'header.html' %}
+    {% include 'footer.html' %}
 </body>
 </html>
