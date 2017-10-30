@@ -25,8 +25,8 @@ def reqCurtainControl():
     else:
         actuator.curtainDown()
 
-    return 1
 
+    return jsonify({"result" : 1})
 
 @app.route("/reqWindowControl", methods=["POST"])
 def reqWindowControl():
@@ -36,7 +36,7 @@ def reqWindowControl():
     else:
         actuator.closeWindow()
 
-    return 1
+    return jsonify({"result" : 1})
 
 @app.route('/getAlaramData', methods=["GET"])
 def getAlaramData():

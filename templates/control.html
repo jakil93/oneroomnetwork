@@ -14,6 +14,7 @@
     <script>
         $(function(){
              $("#curtainBar").bind('change', reqCurtain);
+             $("#windowBar").bind('change', reqWindow);
         })
 
         function reqCurtain(){
@@ -26,6 +27,27 @@
 
             $.ajax({
                 url : "reqCurtainControl",
+                method : "POST",
+                data : "flag=" + data,
+                success : function(data){
+                    alert("성공!");
+                },
+                error : function(){
+                    alert("실패!");
+                }
+            });
+        }
+
+        function reqWindow(){
+            var data = 0;
+            if($("#windowBar").val() == "ON"){
+                data = 0;
+            }else{
+                data = 1;
+            }
+
+            $.ajax({
+                url : "reqWindowControl",
                 method : "POST",
                 data : "flag=" + data,
                 success : function(data){
@@ -64,7 +86,7 @@
             <tr>
                 <td><h2>창문</h2></td>
                 <td>
-                    <select data-role="slider">
+                    <select id="windowBar" data-role="slider">
                       <option value="off">OFF</option>
                       <option value="on">ON</option>
                     </select>
