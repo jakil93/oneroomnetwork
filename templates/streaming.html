@@ -6,7 +6,13 @@
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.mobile-1.4.0-rc.1.js') }}"></script>
     <style>
-        .streaming { background: url({{ url_for('video_feed') }}) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; }
+        .streaming {
+             background: url({{ url_for('video_feed') }}) ;
+             -webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: cover;
+             background-size: cover;
+         }
     </style>
 </head>
 <body>
