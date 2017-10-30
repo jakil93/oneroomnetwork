@@ -42,7 +42,8 @@ def addAlaramData():
     result = db.insertAlaramData(subject, time)
     no = db.getAlaramDataNo(subject, time)
 
-    actuator.alaramDatas.append(no[0], subject, time)
+    temp = ActuatorController.AlaramData(no[0], subject, time)
+    actuator.alaramDatas.append(temp)
     return jsonify({ 'result' : result.rowcount, "no" : no[0] })
 
 @app.route('/getDHT11', methods=["POST"])
