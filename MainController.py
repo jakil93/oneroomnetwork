@@ -141,9 +141,9 @@ def setting():
     #     temp = ActuatorController.AlaramData(items[0], items[1], items[2])
     #     actuator.alaramDatas.append(temp)
 
-    th = Thread(target=actuator.alaramManagementThread)
-    th.daemon = True
-    th.start()
+    # th = Thread(target=actuator.alaramManagementThread)
+    # th.daemon = True
+    # th.start()
 
 
 
