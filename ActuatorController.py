@@ -165,31 +165,28 @@ class ActuatorController:
 if __name__ == "__main__":
     a = ActuatorController()
 
-    # a.buzz_play(2)
-    # print("하하")
-
     print(a.getDHTInfo())
-    # while True:
-    #     try:
-    #         cnt = input("open : 1, close : 0 \n")
-    #         if(cnt == 1):
-    #             a.openWindow()
-    #         elif(cnt == 0):
-    #             a.closeWindow()
-    #     except :
-    #         break;
-
     while True:
         try:
-            cnt = input("Up : 1, Down : 0 \n")
+            cnt = input("open : 1, close : 0 \n")
             if(cnt == 1):
-                print(1)
-                a.curtainUp()
+                a.openWindow()
             elif(cnt == 0):
-                print(0)
-                a.curtainDown()
+                a.closeWindow()
         except :
             break;
+
+    # while True:
+    #     try:
+    #         cnt = input("Up : 1, Down : 0 \n")
+    #         if(cnt == 1):
+    #             print(1)
+    #             a.curtainUp()
+    #         elif(cnt == 0):
+    #             print(0)
+    #             a.curtainDown()
+    #     except :
+    #         break;
 
 
         
