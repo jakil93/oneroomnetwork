@@ -38,12 +38,12 @@ class ActuatorController:
 
     def curtainUp(self):
         GPIO.output(self.dc_pin1, 1)
-        time.sleep(1.2)
+        time.sleep(2.4)
         GPIO.output(self.dc_pin1, 0)
 
     def curtainDown(self):
         GPIO.output(self.dc_pin2, 1)
-        time.sleep(1.2)
+        time.sleep(2.4)
         GPIO.output(self.dc_pin2, 0)
 
     def doServo(self, angle):
