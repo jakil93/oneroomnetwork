@@ -31,7 +31,8 @@ def reqCurtainControl():
 @app.route("/reqWindowControl", methods=["POST"])
 def reqWindowControl():
     flag = request.form['flag']
-    if (flag == 0):
+    print(flag, type(flag))
+    if flag == "0":
         actuator.openWindow()
     else:
         actuator.closeWindow()
