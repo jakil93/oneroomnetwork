@@ -142,9 +142,10 @@ def setting():
         actuator.alaramDatas.append(temp)
 
     print(alaramDatas)
-    # th = Thread(target=actuator.alaramManagementThread)
-    # th.daemon = True
-    # th.start()
+
+    th = Thread(target=actuator.alaramManagementThread)
+    th.daemon = True
+    th.start()
 
 
 
