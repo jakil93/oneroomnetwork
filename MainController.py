@@ -136,10 +136,10 @@ def index():
 
 @app.before_first_request
 def setting():
-    alaramDatas = db.readAlaramData()
-    for items in alaramDatas:
-        temp = ActuatorController.AlaramData(items[0], items[1], items[2])
-        actuator.alaramDatas.append(temp)
+    # alaramDatas = db.readAlaramData()
+    # for items in alaramDatas:
+    #     temp = ActuatorController.AlaramData(items[0], items[1], items[2])
+    #     actuator.alaramDatas.append(temp)
 
     th = Thread(target=actuator.alaramManagementThread)
     th.daemon = True
