@@ -16,6 +16,28 @@ def before_request():
     if 'username' not in session and request.endpoint != 'init' and request.endpoint != 'chkpw' and request.endpoint != 'static':
         return redirect(url_for('init'))
 
+
+@app.route("/reqCurtainControl", methods=["POST"])
+def reqCurtainControl():
+    flag = request.form['flag']
+    if(flag == 0):
+        actuator.curtainUp()
+    else:
+        actuator.curtainDown()
+
+    return 1
+
+
+@app.route("/reqWindowControl", methods=["POST"])
+def reqWindowControl():
+    flag = request.form['flag']
+    if (flag == 0):
+        actuator.openWindow()
+    else:
+        actuator.closeWindow()
+
+    return 1
+
 @app.route('/getAlaramData', methods=["GET"])
 def getAlaramData():
     data = db.selectAlaramData()

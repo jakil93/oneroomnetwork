@@ -15,6 +15,10 @@
         $(function(){
         })
 
+        function reqCurtain(){
+            alert($("#curtainBar").val());
+        }
+
 
     </script>
     <style>
@@ -33,7 +37,7 @@
             <tr>
                 <td><h2>커튼</h2></td>
                 <td style="width: 40%">
-                    <select data-role="slider">
+                    <select id="curtainBar" data-role="slider">
                       <option value="off">OFF</option>
                       <option value="on">ON</option>
                     </select>
