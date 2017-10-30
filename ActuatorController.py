@@ -153,7 +153,8 @@ class ActuatorController:
         from datetime import datetime
 
         while True:
-            currentTime = str(datetime.now().strftime('%H%M'))
+            currentTime = str(datetime.now().strftime('%H:%M'))
+            print("currentTime : ", currentTime)
             for item in ActuatorController.alaramDatas:
                 if(item.time == currentTime):
                     self.buzz_play(1)
