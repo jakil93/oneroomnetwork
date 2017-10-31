@@ -5,7 +5,7 @@ import cv2
 import imgs
 from threading import Thread
 
-thresh = 32
+thresh = 52
 fourcc = ''
 
 img = ''
