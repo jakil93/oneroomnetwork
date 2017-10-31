@@ -13,7 +13,7 @@ i0 = ''
 i1 = ''
 i2 = ''
 set = False
-fr = 30
+fr = 16
 
 
 def diffImage(i0, i1, i2):
