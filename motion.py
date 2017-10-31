@@ -48,10 +48,13 @@ def recording(frames):
     return frames
 
 def release(out, frames):
+    t = time.time()
+    print("release start")
     for frame in frames:
         out.write(frame)
     out.release()
-    print("release")
+    t = time.time() - t
+    print("release stop : ",t)
 
 def getOutput(frame):
     h, w, _ = frame.shape
@@ -88,11 +91,9 @@ def start():
             print('시작')
             out = getOutput(img)
             while True:
-                print('계속')
                 frames = recording(frames)
                 count = motionCheck()
-                if not(count > 1):
-
+                if not(True):
                     th = Thread(target=release, args=(out, frames))
                     th.start()
 
@@ -100,4 +101,7 @@ def start():
                     tt = time.time() - tt
                     print('time :', tt)
                     break
+                else:
+                    print('계속')
+
         getImg()
