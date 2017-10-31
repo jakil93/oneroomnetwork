@@ -20,7 +20,7 @@ def before_request():
 @app.route("/reqCurtainControl", methods=["POST"])
 def reqCurtainControl():
     flag = request.form['flag']
-    if(flag == 0):
+    if flag == "0":
         actuator.curtainUp()
     else:
         actuator.curtainDown()
@@ -31,7 +31,6 @@ def reqCurtainControl():
 @app.route("/reqWindowControl", methods=["POST"])
 def reqWindowControl():
     flag = request.form['flag']
-    print(flag, type(flag))
     if flag == "0":
         actuator.openWindow()
     else:
