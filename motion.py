@@ -92,10 +92,11 @@ def start():
             out = getOutput(img)
             while True:
                 frames = recording(frames)
-                # count = motionCheck()
-                if (True):
-                    th = Thread(target=release, args=(out, frames))
-                    th.start()
+                count = motionCheck()
+                if not(count > 1):
+                    # th = Thread(target=release, args=(out, frames))
+                    # th.start()
+                    release(out, frames)
 
                     print('종료')
                     tt = time.time() - tt
