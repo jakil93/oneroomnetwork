@@ -92,7 +92,7 @@ def start():
             out = getOutput(img)
             while True:
                 frames = recording(frames)
-                count = motionCheck()
+                # count = motionCheck()
                 if (True):
                     th = Thread(target=release, args=(out, frames))
                     th.start()
